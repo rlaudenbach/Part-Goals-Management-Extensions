@@ -1,0 +1,161 @@
+﻿<AML>
+ <Item type="Method" id="036DC8467E034A42AC78F456BBF355DA" action="add">
+  <execution_allowed_to keyed_name="World" type="Identity">A73B655731924CD0B027E4F4D5FCC0A9</execution_allowed_to>
+  <method_code><![CDATA[//System.Diagnostics.Debugger.Launch();System.Diagnostics.Debugger.Break();
+
+// read args (with relevant rollup configuration settings)
+string rollupType = this.getAttribute("rollupType", "");
+string rollupTypePropName = this.getAttribute("rollupTypePropName", "");
+string rollupValuePropName = this.getAttribute("rollupValuePropName", "");
+string rollupBasisPropName = this.getAttribute("rollupBasisPropName", "");
+string rollupStructRelshipType = this.getAttribute("rollupStructRelshipType", "");
+string rollupValuesRelshipType = this.getAttribute("rollupValuesRelshipType", "");
+string rollupCalculatedValuePropName = this.getAttribute("rollupCalculatedValuePropName", "");
+string rollupCalculatedBasisLabel = this.getAttribute("rollupCalculatedBasisLabel", "");
+string rollupRollupQuantityPropName = this.getAttribute("rollupRollupQuantityPropName", "");
+//string rollupRelshipUnitPropName = this.getAttribute("rollupRelshipUnitPropName", "");
+//string rollupUnitPropName = this.getAttribute("rollupUnitPropName", "");
+string rollupManualValuePropNames = this.getAttribute("rollupManualValuePropNames", "");   // --> comma separated (precedence: right to Left)
+string rollupManualBasisLabels = this.getAttribute("rollupManualBasisLabels", "");         //--> comma separated (aligned with ManualPropNames)
+
+// load relevant relationship of this item, with relevant properties
+string rollupRelProperties = rollupTypePropName+","+rollupCalculatedValuePropName+","+rollupManualValuePropNames;
+
+string aml = "<Item type='"+this.getType()+"' action='get' id='"+this.getID()+"' ";
+aml += "select='id,name,state,"+rollupValuePropName+","+rollupBasisPropName+"' >";
+aml += "<Relationships>";
+aml += "<Item type='"+rollupValuesRelshipType+"' action='get' select='"+rollupRelProperties+"' >";
+aml += "<"+rollupTypePropName+">"+rollupType+"</"+rollupTypePropName+">";
+aml += "</Item>";
+aml += "</Relationships>";
+aml += "</Item>";
+Item thisItem = this.newItem("");
+thisItem.loadAML(aml);
+thisItem = thisItem.apply();
+Item rollupRelationships = thisItem.getRelationships(rollupValuesRelshipType);
+
+// process rollup input values for given rollupType
+for (int i=0; i<rollupRelationships.getItemCount(); i++) {
+    Item rollupRelationship = rollupRelationships.getItemByIndex(i);
+    
+    if (rollupRelationship.getProperty(rollupTypePropName,"") == rollupType) {
+    
+        List<ValueAndBasis> rollupRelationshipsValuesAndBasis = GetRollupRelshipValuesAndBasis (rollupRelationship, rollupCalculatedValuePropName, rollupCalculatedBasisLabel, rollupManualValuePropNames, rollupManualBasisLabels);
+    
+        string relshipTN = "["+rollupRelationship.getType().Replace(" ","_")+"]";
+        
+        // if basis is 'calculated', do the calculation on 1 level of structure relationships
+        string rollupValue = "null";
+        string rollupBasis = rollupCalculatedBasisLabel;
+        // process reverse to apply precedences - find first value
+        for (int j=0; j<rollupRelationshipsValuesAndBasis.Count && rollupValue == "null"; j++) {
+            ValueAndBasis vb = rollupRelationshipsValuesAndBasis[j];
+            rollupBasis = vb.basis;
+            if (vb.value != 0) {
+                rollupValue = Convert.ToString(vb.value);
+                rollupBasis = vb.basis;
+            }
+        }
+    
+        string calculatedRollupValue = "null";
+        
+        //if (rollupBasis == rollupCalculatedBasisLabel) {
+            // do calculation - results are returned in 'thisItem'
+            CalculateRollupOnThisItem (thisItem, rollupStructRelshipType, rollupValuePropName, rollupBasisPropName, rollupRollupQuantityPropName);
+    
+            // get calculated value
+            thisItem.setProperty(rollupBasisPropName, rollupCalculatedBasisLabel);
+            calculatedRollupValue = thisItem.getProperty(rollupValuePropName,"null");
+
+        //}
+        decimal calculatedVal = 0;
+        if (calculatedRollupValue != "null") {calculatedVal = Convert.ToDecimal(calculatedRollupValue);}
+        if (calculatedVal == 0) {calculatedRollupValue = "null";}
+
+        // set calculated value on rollup relationship -- if manual values are detected, this will be set to "null"
+        // set values on rollup Relationship items (using SQL)
+        string SQL = "UPDATE "+relshipTN+" SET "+relshipTN+"."+rollupCalculatedValuePropName+"="+calculatedRollupValue;
+        SQL += " WHERE "+relshipTN+".id='"+rollupRelationship.getID()+"'";
+        this.getInnovator().applySQL(SQL);
+
+        if (calculatedRollupValue != "null" && rollupBasis == rollupCalculatedBasisLabel) {rollupValue = calculatedRollupValue;}
+
+        // set values on this node (using SQL) - rollupValue, rollupBasis, valueUnit
+        string itemTN = "["+thisItem.getType().Replace(" ","_")+"]";
+        SQL = "UPDATE "+itemTN;
+        SQL += " SET "+itemTN+"."+rollupValuePropName+"="+rollupValue;
+        SQL += ", "+itemTN+"."+rollupBasisPropName+"='"+rollupBasis+"'";
+        SQL += " WHERE "+itemTN+".id='"+thisItem.getID()+"'";
+        
+        this.getInnovator().applySQL(SQL);
+    }
+}
+return thisItem;
+}
+
+// ------------------
+public struct ValueAndBasis
+{
+    public string propname;
+    public decimal value;
+    public string basis;
+}
+
+// ------------------
+private List<ValueAndBasis> GetRollupRelshipValuesAndBasis (Item rollupRelshipItem, string rollupCalculatedValuePropName, string rollupCalculatedBasisLabel, string rollupManualValuePropNames, string rollupManualBasisLabels) {
+
+    List<ValueAndBasis> resList = new List<ValueAndBasis>();
+
+    ValueAndBasis vb;
+    
+    // look a manual values first 
+    string[] rollupManualValuePropNames_a = rollupManualValuePropNames.Split(',');
+    string[] rollupManualBasisLabels_a = rollupManualBasisLabels.Split(',');
+    
+    // process right to left -- defines order of precedence
+    for (int i=rollupManualValuePropNames_a.Length-1;i>=0 && rollupManualValuePropNames_a[0] != "";i--) {
+        vb.propname = rollupManualValuePropNames_a[i];
+        vb.value = Convert.ToDecimal(rollupRelshipItem.getProperty(rollupManualValuePropNames_a[i],"0"));
+        vb.basis = rollupManualBasisLabels_a[i];
+        resList.Add(vb);
+    }
+    
+    // look a calculated value first 
+    vb.propname = rollupCalculatedValuePropName;
+    vb.value = Convert.ToDecimal(rollupRelshipItem.getProperty(rollupCalculatedValuePropName,"0"));
+    vb.basis = rollupCalculatedBasisLabel;
+    resList.Add(vb);
+    
+    // return dictionary
+    return resList;
+}
+
+// ------------------
+private void CalculateRollupOnThisItem (Item thisItem, string rollupStructRelshipType, string rollupValuePropName, string rollupBasisPropName, string rollupRollupQuantityPropName) {
+    //
+    thisItem.fetchRelationships(rollupStructRelshipType);
+    Item structRelationships = thisItem.getRelationships(rollupStructRelshipType);
+    // NOTE: Relationships must include related items (not just the id)
+    
+    // calculate value from next level children
+    decimal calculatedValue = 0;
+    for (int i=0; i<structRelationships.getItemCount(); i++) {
+        Item relShipItem = structRelationships.getItemByIndex(i);
+        Item relatedItem = relShipItem.getRelatedItem();
+        
+        decimal quantityValue = 1;
+        if (rollupRollupQuantityPropName != "") {quantityValue = Convert.ToDecimal(relShipItem.getProperty(rollupRollupQuantityPropName,"1"));}
+        
+    	calculatedValue += Convert.ToDecimal(relatedItem.getProperty(rollupValuePropName, "0")) * quantityValue;
+    }
+    
+    // update value on this item (but do not apply to server) 
+    thisItem.setProperty(rollupValuePropName, Convert.ToString(calculatedValue));
+}
+
+private void EoM () {
+]]></method_code>
+  <method_type>C#</method_type>
+  <name>RollupSinglePartGoals</name>
+ </Item>
+</AML>

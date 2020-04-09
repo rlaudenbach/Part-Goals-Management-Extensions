@@ -1,0 +1,95 @@
+﻿<AML>
+ <Item type="Method" id="C5A36E7FCF114A0A86A0194FECE78A49" action="add">
+  <execution_allowed_to keyed_name="World" type="Identity">A73B655731924CD0B027E4F4D5FCC0A9</execution_allowed_to>
+  <method_code><![CDATA[/// Dialog API
+var linkedObjectItem = document.thisItem; 
+
+// - Class - 
+SelectRollupTypesDialog = function ()
+{
+	if (linkedObjectItem.getItemCount() == 1) {
+	    //debugger;
+	   
+		//get Dropdown Control Element --- Deliverable class (poly item type) ---
+		var div_id = getFieldByName("dd_select_rollup_type").id;
+		var control_id = div_id.substring(0, div_id.indexOf("span"));
+		var ddList = document.getElementById(control_id);
+
+		// remove this element, first
+		var listParent = ddList.parentNode;
+		ddList.parentNode.removeChild(ddList);
+
+		// create new select list element
+		ddList = document.createElement("select");
+		ddList.id = control_id;
+		listParent.appendChild(ddList);
+		
+		var rollupTypesListId = document.thisItem.getProperty("rollup_types_list","");
+		if (rollupTypesListId === "") {
+		    return;
+		}
+		
+		this.rollupTypes = top.aras.newIOMItem("Value", "get");
+		this.rollupTypes.setProperty("source_id",rollupTypesListId);
+		this.rollupTypes = this.rollupTypes.apply();
+		
+		for (var i=0;i<this.rollupTypes.getItemCount();i++) {
+			fn_addOptionToDropDown (ddList,this.rollupTypes.getItemByIndex(i).getProperty("label",""),this.rollupTypes.getItemByIndex(i).getProperty("value",""));
+		}
+	}	
+};
+
+SelectRollupTypesDialog.prototype.continueWithRollupType = function SelectRollupTypesDialog_continueWithRollupType()
+{
+    rollupTypeValue = "";
+    
+    for (var i=0; i<this.rollupTypes.getItemCount() && rollupTypeValue === ""; i++) {
+        
+        var rollupTypeFieldValue = fn_getFormFieldValue("dd_select_rollup_type");
+        if (rollupTypeFieldValue === this.rollupTypes.getItemByIndex(i).getProperty("label","") ) {
+            rollupTypeValue = this.rollupTypes.getItemByIndex(i).getProperty("value","");
+        }
+    }
+    parent.args.dialog.result = rollupTypeValue;
+	parent.args.dialog.close();
+};
+
+// - Helper functions - 
+//-----------------
+//-----------------
+fn_addOptionToDropDown = function (dropdown, optionLabel, optionValue) {
+	var newOption = new Option(optionLabel,optionValue);
+	dropdown.options[dropdown.options.length] = newOption;
+	return newOption;
+};
+
+//-----------------
+fn_getFormFieldValue = function (fieldName, type) {
+	// read Filter settings from dialog
+	var div_id = getFieldByName(fieldName).id;
+	var control_id = div_id.substring(0, div_id.indexOf("span"));
+	var field = document.getElementById(control_id);
+	if (type !== "undefined" && type === "check") {
+		return field.isChecked;
+	}
+	return field.value;
+};
+
+//-----------------
+fn_setFormFieldValue = function (fieldName, value, forceDisable) {
+	// read Filter settings from dialog
+	var div_id = getFieldByName(fieldName).id;
+	var control_id = div_id.substring(0, div_id.indexOf("span"));
+	var field = document.getElementById(control_id);
+	field.value = value;
+	if (forceDisable) {field.disabled = true;}
+};
+
+
+
+// - Class instantiation - 
+top.SelectRollupTypesDialog = new SelectRollupTypesDialog();]]></method_code>
+  <method_type>JavaScript</method_type>
+  <name>ruc_SelectRollupTypesDialog_api</name>
+ </Item>
+</AML>

@@ -1,0 +1,11 @@
+﻿<AML>
+ <Item type="Method" id="1A9259F6945B48FBA79A2F7E4C8D565B" action="add">
+  <execution_allowed_to keyed_name="World" type="Identity">A73B655731924CD0B027E4F4D5FCC0A9</execution_allowed_to>
+  <method_code><![CDATA[// intentionally - no logic
+// this method is used to override - ootb rollup logic - that , with the "Part Goal Management" add on, is handled in other places.
+
+return this;]]></method_code>
+  <method_type>C#</method_type>
+  <name>RollupPartOnAfterAddUpdate</name>
+ </Item>
+</AML>

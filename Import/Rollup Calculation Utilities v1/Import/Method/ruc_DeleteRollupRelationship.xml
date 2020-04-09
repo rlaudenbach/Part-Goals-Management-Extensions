@@ -1,0 +1,82 @@
+﻿<AML>
+ <Item type="Method" id="C6047FF3ED884693B93A62B52B4251E7" action="add">
+  <execution_allowed_to keyed_name="Administrators" type="Identity">2618D6F5A90949BAA7E920D1B04C7EE1</execution_allowed_to>
+  <method_code><![CDATA[//System.Diagnostics.Debugger.Launch();System.Diagnostics.Debugger.Break();
+
+// read args (with relevant rollup configuration settings)
+string rollupType = this.getAttribute("rollupType", "");
+string rollupTypePropName = this.getAttribute("rollupTypePropName", "");
+string rollupValuePropName = this.getAttribute("rollupValuePropName", "");
+string rollupBasisPropName = this.getAttribute("rollupBasisPropName", "");
+//string rollupStructRelshipType = this.getAttribute("rollupStructRelshipType", "");
+string rollupValuesRelshipType = this.getAttribute("rollupValuesRelshipType", "");
+//string rollupCalculatedValuePropName = this.getAttribute("rollupCalculatedValuePropName", "");
+string rollupCalculatedBasisLabel = this.getAttribute("rollupCalculatedBasisLabel", "");
+//string rollupRollupQuantityPropName = this.getAttribute("rollupRollupQuantityPropName", "");
+//string rollupRelshipUnitPropName = this.getAttribute("rollupRelshipUnitPropName", "");
+string rollupUnitPropName = this.getAttribute("rollupUnitPropName", "");
+string rollupUnit = this.getAttribute("rollupUnit", "");
+//string rollupManualValuePropNames = this.getAttribute("rollupManualValuePropNames", "");   // --> comma separated (precedence: right to Left)
+//string rollupManualBasisLabels = this.getAttribute("rollupManualBasisLabels", "");         //--> comma separated (aligned with ManualPropNames)
+
+this.fetchRelationships(rollupValuesRelshipType);
+Item rollupRels = this.getRelationships(rollupValuesRelshipType);
+
+for (int i=0; i<rollupRels.getItemCount(); i++) {
+    Item rollupRel = rollupRels.getItemByIndex(i);
+    
+    // does rel of this type exist already. If not add it
+    if (rollupRel.getProperty(rollupTypePropName,"") == rollupType) {
+        Item res = DeleteRollupRelationshipFromNode (rollupValuesRelshipType, rollupRel.getID());
+        if (res.isError()) {return res;}
+            
+    }
+
+    // RESET flag and basis properties on this item
+    ResetHasRollupRelFlagOnNode(this.getType(), this.getID(), rollupValuePropName, rollupUnitPropName, rollupBasisPropName );
+}
+
+return this;
+}
+
+//-------
+private Item DeleteRollupRelationshipFromNode (string rollupRelType, string rollupRelId) {
+    //Get super user identity
+    Aras.Server.Security.Identity identity = Aras.Server.Security.Identity.GetByName("Super User");
+    bool permsWasSet = Aras.Server.Security.Permissions.GrantIdentity(identity);
+    
+    Item rollupRel = this.newItem(rollupRelType, "delete");
+    rollupRel.setID(rollupRelId);
+    rollupRel.setAttribute("serverEvents","0");
+    rollupRel = rollupRel.apply();
+    
+    if (permsWasSet) {Aras.Server.Security.Permissions.RevokeIdentity(identity);}
+
+    return rollupRel;
+}
+
+//-------
+private void ResetHasRollupRelFlagOnNode (string nodeType, string nodeId, string rollupValuePropName, string rollupUnitPropName, string rollupBasisPropName) {
+
+    // using SQL is ok, permissions are not relevant !
+    string TN = "["+nodeType.Replace(" ","_")+"]";
+    string SQL = "UPDATE "+TN+" SET "+TN+"."+rollupValuePropName+"= null";
+    
+    if (rollupUnitPropName != "") {
+        SQL += ", "+TN+"."+rollupUnitPropName+"= null";            
+    }
+    if (rollupBasisPropName != "") {
+        SQL += ", "+TN+"."+rollupBasisPropName+"= null";            
+    }
+    SQL += " WHERE "+TN+".id='"+nodeId+"'";
+    
+    this.getInnovator().applySQL(SQL);
+}
+
+//-------
+private void EoM () {
+]]></method_code>
+  <method_type>C#</method_type>
+  <name>ruc_DeleteRollupRelationship</name>
+ </Item>
+</AML>

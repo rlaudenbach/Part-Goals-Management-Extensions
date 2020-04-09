@@ -1,0 +1,23 @@
+﻿<AML>
+ <Item type="Method" id="02D7930182434F12AFF60DCB1ED7F98B" action="add">
+  <execution_allowed_to keyed_name="World" type="Identity">A73B655731924CD0B027E4F4D5FCC0A9</execution_allowed_to>
+  <method_code><![CDATA[if (this.getAttribute("serverEvents","1") =="0") { return this;}
+
+string action = this.getAttribute("action","");
+string ErrorMessage = "Delete";
+
+switch (action) {
+    case "add":
+    case "merge":
+        ErrorMessage = "Adding new rows is not allowed !  These are added by a dedicated Action.  Please remove all new rows and save again.";
+        return this.getInnovator().newError(ErrorMessage);
+
+    case "delete":
+        ErrorMessage = "Deleting rows is not allowed !  These are removed by a dedicated Action.  Please click on Discard to undo the delete action.";
+        return this.getInnovator().newError(ErrorMessage);
+}
+return this;]]></method_code>
+  <method_type>C#</method_type>
+  <name>ruc_RelshipPreventAddOrDelete</name>
+ </Item>
+</AML>

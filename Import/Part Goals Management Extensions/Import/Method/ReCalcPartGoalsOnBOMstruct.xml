@@ -1,0 +1,74 @@
+﻿<AML>
+ <Item type="Method" id="802B9355AC1E4C2B9FDF7AB8BA4B43D8" action="add">
+  <execution_allowed_to keyed_name="World" type="Identity">A73B655731924CD0B027E4F4D5FCC0A9</execution_allowed_to>
+  <method_code><![CDATA[// context Item:  Part
+// calling Action: "ReCalcPartGoalsOnBOMstruct"
+
+// System.Diagnostics.Debugger.Launch();System.Diagnostics.Debugger.Break();
+
+// 1. read Rollup Configuration
+string rollupConfigurationKey = "Part BOM";
+
+// 2. get Part Goal from part
+string aml = "<Item type='Part' action= 'get' id='"+this.getID()+"' >";
+aml += "<Relationships>";
+aml += "<Item type='Part Goal' action= 'get' select='*' >";
+aml += "</Item>";
+aml += "</Relationships>";
+aml += "</Item>";
+Item part = this.newItem("");
+part.loadAML(aml);
+part = part.apply();
+
+// 3. Read rollup Configuration
+Item callMethod = this.newItem("Method", "ruc_GetRollupDefintion");
+callMethod.setAttribute("rollupStructRelshipType",rollupConfigurationKey);
+
+Item rollupDefinition = callMethod.apply();
+if (rollupDefinition.getItemCount() != 1) {
+    return this.getInnovator().newError("Error reading rollup configuration: Missing or multiple configurations for rollup structure '"+callMethod.getAttribute("rollupStructRelshipType","-")+"'");
+}
+
+// 4. for each item type in parent goals run "add" common rollup relship method on child part
+string partGoalType = "";
+Item parentPartGoals = part.getItemsByXPath("//Item[@type='Part Goal']");
+for (int i=0; i<parentPartGoals.getItemCount(); i++) {
+    Item parentPartGoal = parentPartGoals.getItemByIndex(i);
+    partGoalType = parentPartGoal.getProperty("goal","");
+
+    // do rollup calculations
+    string rollupServiceMethod = rollupDefinition.getProperty("rollup_service_method","");
+    
+    // --- run generic rollup service method ---
+    // rollupType                       *required
+    // rollupStartNodeId                *required
+    // rollupStartNodeItemType          *required
+    // resolutionDirection              *required     --> can be up or down(=default)
+    // levelProcessingDirection         optional      --> can be up or down.  default = resolutionDirection
+    // processLeafLevelOnly             optional      --> can be "1" or "0"(=default) - use, if resolutionDirection = down
+    // applyResolutionFilter            optional      --> can be "1" or "0". filter is defined in rollup configuration
+    // skipFilterOnImmediateNextLevel   optional      --> skips filter on next level to ensure its next parents or next children are always processed
+    // rollupNodeCallbackMethods        optional      --> comma separated list of method names (overrides configured methods)
+    
+    rollupDefinition.setAttribute("rollupType", partGoalType);
+    rollupDefinition.setAttribute("dataModelAction", "add");
+    rollupDefinition.setAttribute("rollupStartNodeId", part.getID());
+    rollupDefinition.setAttribute("rollupStartNodeItemType", part.getType());
+    rollupDefinition.setAttribute("rollupStructRelshipType", rollupConfigurationKey);
+    rollupDefinition.setAttribute("resolutionDirection", "down");
+    rollupDefinition.setAttribute("levelProcessingDirection", "up");
+    rollupDefinition.setAttribute("applyResolutionFilter", "1");
+    rollupDefinition.setAttribute("skipFilterOnImmediateNextLevel", "1");
+    //rollupDefinition.setAttribute("processLeafLevelOnly", "1");
+    
+    Item res = rollupDefinition.apply(rollupServiceMethod);
+    if (res.isError()) {return res;}
+
+}
+
+return this;
+]]></method_code>
+  <method_type>C#</method_type>
+  <name>ReCalcPartGoalsOnBOMstruct</name>
+ </Item>
+</AML>

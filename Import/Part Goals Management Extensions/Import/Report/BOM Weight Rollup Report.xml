@@ -1,0 +1,347 @@
+﻿<AML>
+ <Item type="Report" id="5E2475D4F7844BDC9814482262E8E103" action="add">
+  <description />
+  <label xml:lang="en">BOM Weight Goals Report</label>
+  <location>client</location>
+  <method keyed_name="PE_runWeightGoalRep_ApplyXslt" type="Method">
+   <Item type="Method" action="get" select="id">
+    <name>PE_runWeightGoalRep_ApplyXslt</name>
+   </Item>
+  </method>
+  <report_query />
+  <target>window</target>
+  <type>item</type>
+  <xsl_stylesheet><![CDATA[<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:msxsl="urn:schemas-microsoft-com:xslt" xmlns:aras="http://www.aras-corp.com" version="1.0">
+	<parsererror xmlns="http://www.w3.org/1999/xhtml" style="display: block; white-space: pre; border: 2px solid #c77; padding: 0 1em 0 1em; margin: 1em; background-color: #fdd; color: black">
+		<h3>This page contains the following errors:</h3>
+		<div style="font-family:monospace;font-size:12px">
+			error on line 243 at column 19: error parsing attribute name
+		</div>
+		<h3>Below is a rendering of the page up to the first error.</h3>
+	</parsererror>
+	 <xsl:output method="html" omit-xml-declaration="yes" standalone="yes" indent="yes"/>
+	 <xsl:variable name="MaxDepth">
+		  <xsl:for-each select="Result/Item[@alias='Part']/depth">
+			   <xsl:sort select="." data-type="number" order="descending"/>
+			   <xsl:if test="position() = 1">
+				    <xsl:value-of select="."/>
+			   </xsl:if>
+		  </xsl:for-each>
+	 </xsl:variable>
+	 <xsl:template match="/">
+		  <html>
+			   <head/>
+			   <style type="text/css" userData="Global">
+				.cellSolid {
+				border-top:1px #000000 solid;
+				border-right:1px #000000 solid;
+				border-bottom:1px #000000 solid;
+				border-left:1px #000000 solid;
+				}
+				.cellSolidTopRight {
+				border-top:1px #000000 solid;
+				border-right:1px #000000 solid;
+				}
+				.cellSolidTopLeft {
+				border-top:1px #000000 solid;
+				border-left:1px #000000 solid;
+				}
+				.cellSolidRightBottom {
+				border-right:1px #000000 solid;
+				border-bottom:1px #000000 solid;
+				}
+				.cellSolidBottomLeft {
+				border-bottom:1px #000000 solid;
+				border-left:1px #000000 solid;
+				}
+				.cellSolidTop {
+				border-top:1px #000000 solid;
+				}
+				.cellSolidRight {
+				border-right:1px #000000 solid;
+				}
+				.cellSolidBottom {
+				border-bottom:1px #000000 solid;
+				}
+				.cellSolidLeft {
+				border-left:1px #000000 solid;
+				}
+				.cellDashed {
+				border-top:1px #666666 dashed;
+				border-right:1px #666666 dashed;
+				border-bottom:1px #666666 dashed;
+				border-left:1px #666666 dashed;
+				}
+				.cellDashedTopRight {
+				border-top:1px #666666 dashed;
+				border-right:1px #666666 dashed;
+				}
+				.cellDashedTopLeft {
+				border-top:1px #666666 dashed;
+				border-left:1px #666666 dashed;
+				}
+				.cellDashedBottomRight {
+				border-bottom:1px #666666 dashed;
+				border-right:1px #666666 dashed;
+				}
+				.cellDashedBottomLeft {
+				border-bottom:1px #666666 dashed;
+				border-left:1px #666666 dashed;
+				}
+				.cellDashedTop {
+				border-top:1px #666666 dashed;
+				}
+				.cellDashedRight {
+				border-right:1px #666666 dashed;
+				}
+				.cellDashedBottom {
+				border-bottom:1px #666666 dashed;
+				}
+				.cellDashedLeft {
+				border-left:1px #666666 dashed;
+				}
+				.cellHeader {
+				background-color:#CCCCCC;
+				border-top:1px #000000 solid;
+				border-right:1px #000000 solid;
+				border-bottom:1px #000000 solid;
+				padding:2px;
+				text-align:center;
+				text-transform:capitalize;
+				text-align:center;
+				font-family:helvetica;
+				font-weight:bold;
+				font-size:8pt;
+				}
+				.cellHeaderVertBT {
+				background-color:#CCCCCC;
+				border-top:1px #000000 solid;
+				border-right:1px #000000 solid;
+				border-bottom:1px #000000 solid;
+				border-left:1px #000000 solid;
+				padding:2px;
+				writing-mode:tb-rl;filter: flipv fliph;
+				text-align:center;
+				text-transform:capitalize;
+				text-align:center;
+				font-family:helvetica;
+				font-weight:bold;
+				font-size:8pt;
+				}
+				.cellHeaderVertTB {
+				background-color:#CCCCCC;
+				border-top:1px #000000 solid;
+				border-right:1px #000000 solid;
+				border-bottom:1px #000000 solid;
+				border-left:1px #000000 solid;
+				padding:2px;
+				writing-mode:tb-rl;filter: flipv flipv;
+				text-align:center;
+				text-transform:capitalize;
+				text-align:center;
+				font-family:helvetica;
+				font-weight:bold;
+				font-size:8pt;
+				}
+			</style>
+			<body topmargin="50" leftmargin="50">
+				    <div class="print_button_wrapper">
+					     <img id="print_button" src="../images/Print.svg" onclick="printReport(window);"/>
+					     <a href="#" onclick="printReport(window); return false;">Print</a>
+				    </div>
+				    <div class="table_wrapper">
+					     <div class="report_name">
+						      Bill of Materials Weight Goals Report
+					     </div>
+					     <div class="report_generation_time"/>
+					     <table border="0" cellspacing="0" cellpadding="0">
+						      <tr>
+							       <th colspan="{$MaxDepth + 1}">BOM Level</th>
+							       <th>Part Number</th>
+							       <th>Name</th>
+							       <th>Quantity</th>
+							       <th>Weight/Qty</th>
+							       <th>Weight/Unit</th>
+							       <th>Weight Basis</th>
+							       <th>Weight Target</th>
+							       <th>Target Basis</th>
+							       <th>W-Unit</th>
+						      </tr>
+						       <xsl:call-template name="Levels"/>
+					     </table>
+				    </div>
+			   </body>
+			   <script>
+				    function loadScript(url)
+				    {
+				     const loadedJS = document.createElement('script');
+				     loadedJS.src = url;
+				     document.getElementsByTagName('head')[0].appendChild(loadedJS);
+				    }
+				    function loadStyle(url)
+				    {
+				     const link = document.createElement('link');
+				     link.setAttribute('rel', 'stylesheet');
+				     link.setAttribute('href', url);
+				     document.getElementsByTagName('head')[0].appendChild(link)
+				    }
+				    loadScript(parent.aras.getBaseURL('/Solutions/PLM/javascript/report.js'));
+				    loadStyle(parent.aras.getBaseURL('/Solutions/PLM/styles/report.css'));
+			   </script>
+		  </html>
+	 </xsl:template>
+	 <!-- Find the Part Level and pass as the 'Depth' param to the next template -->
+	 <xsl:template name="Levels">
+		  <xsl:for-each select="Result/Item[@alias='Part']">
+			   <xsl:apply-templates mode="PartBOM" select=".">
+				    <xsl:with-param name="Depth" select="depth"/>
+			   </xsl:apply-templates>
+		  </xsl:for-each>
+	 </xsl:template>
+	 <xsl:template name="IndentureLevel">
+		  <xsl:param name="currentDepth" select="0"/>
+		  <xsl:if test="$currentDepth = 0">
+			   <td width="20px" style="padding: 5px 0px 5px 10px" align="center">
+				    <xsl:if test="depth=$currentDepth">
+					<xsl:value-of select="depth"/>
+				</xsl:if>
+			   </td>
+		  </xsl:if>
+		  <xsl:if test="$currentDepth != 0">
+			   <td width="20px" style="padding: 5px 0" align="center">
+				    <xsl:if test="depth=$currentDepth">
+					<xsl:value-of select="depth"/>
+				</xsl:if>
+			   </td>
+		  </xsl:if>
+		  <xsl:if test="not($currentDepth = $MaxDepth)">
+			   <xsl:call-template name="IndentureLevel">
+				    <xsl:with-param name="currentDepth" select="$currentDepth + 1"/>
+			   </xsl:call-template>
+		  </xsl:if>
+	 </xsl:template>
+	 <xsl:template mode="PartBOM" match="Result/Item[@alias='Part']">
+		  <xsl:param name="Depth"/>
+		  <tr>
+			   <xsl:call-template name="IndentureLevel"/>
+			   <td>
+				    <xsl:value-of select="item_number"/>
+				    <xsl:if test="item_number='' or not(item_number)">
+					<xsl:text> </xsl:text>
+				</xsl:if>
+			   </td>
+			   <td>
+				    <xsl:value-of select="name"/>
+				    <xsl:if test="name='' or not(name)">
+					<xsl:text> </xsl:text>
+				</xsl:if>
+			   </td>
+			   <xsl:choose>
+				    <xsl:when test="$Depth = '0'">
+					     <td align="right">1</td>
+				    </xsl:when>
+				    <xsl:when test="quantity != '0'">
+					     <td align="right">
+						      <xsl:value-of select="quantity"/>
+						      <xsl:if test="quantity='' or not(quantity)">
+							<xsl:text> </xsl:text>
+						</xsl:if>
+					     </td>
+				    </xsl:when>
+				    <xsl:otherwise>
+					     <td>0</td>
+				    </xsl:otherwise>
+			   </xsl:choose>
+			   <td align="right">
+				<xsl:choose>
+					    <xsl:when test="quantity='' or not(quantity)">
+						<xsl:value-of select="weight"/>
+						<xsl:if test="weight='' or not(weight)">
+							<xsl:text> </xsl:text>
+						</xsl:if>
+					</xsl:when>
+					<xsl:otherwise>
+						<xsl:variable name="weightPerQty" select="quantity * weight"/>
+						<xsl:choose>
+							<xsl:when test="$weightPerQty='' or not($weightPerQty) or format-number(number($weightPerQty),'0.0000')='NaN'">
+								<xsl:text> </xsl:text>
+							</xsl:when>
+							<xsl:otherwise>
+								   <xsl:value-of select="format-number(number($weightPerQty),'0.0000')"/>
+							</xsl:otherwise>
+						</xsl:choose>
+					</xsl:otherwise>
+				</xsl:choose>
+			   </td>
+			   <td align="right">
+				    <xsl:value-of select="weight"/>
+				    <xsl:if test="weight='' or not(weight)">
+					<xsl:attribute name="bgcolor">
+						<xsl:text>#ffff00</xsl:text>
+					</xsl:attribute>
+					<xsl:text> </xsl:text>
+				</xsl:if>
+			   </td>
+			   <td align="center">
+				    <xsl:value-of select="weight_basis"/>
+				    <xsl:if test="weight_basis='' or not(weight_basis)">
+					<xsl:text> </xsl:text>
+				</xsl:if>
+			   </td>
+			   <td align="right">
+				<xsl:choose>
+					<xsl:when test="weight_target='' or not(weight_target) or weight_target='0'">
+						<xsl:attribute name="bgcolor">
+							<xsl:text>#ffff00</xsl:text>
+						</xsl:attribute>
+						<xsl:text> </xsl:text>
+					</xsl:when>
+					<xsl:otherwise>
+						<xsl:variable name="weightValue" select="weight"/>
+						<xsl:variable name="weightTarget" select="weight_target"/>
+						<xsl:choose>
+							<xsl:when test="$weightTarget &gt; $weightValue">
+								<xsl:attribute name="bgcolor">
+									<xsl:text>GreenYellow</xsl:text>
+								</xsl:attribute>
+							</xsl:when>
+							<xsl:otherwise>
+								<xsl:choose>
+									<xsl:when test="$weightTarget &lt; $weightValue">
+										<xsl:attribute name="bgcolor">
+											<xsl:text>red</xsl:text>
+										</xsl:attribute>
+									</xsl:when>
+									<xsl:otherwise>
+										<xsl:attribute name="bgcolor">
+											<xsl:text>white</xsl:text>
+										</xsl:attribute>
+									</xsl:otherwise>
+								</xsl:choose>
+							</xsl:otherwise>
+						</xsl:choose>
+						<xsl:value-of select="$weightTarget"/>
+					</xsl:otherwise>
+				</xsl:choose>
+				    <xsl:if test="weight_target='' or not(weight_target)">
+					<xsl:text> </xsl:text>
+				</xsl:if>
+			   </td>
+			   <td align="center">
+				    <xsl:value-of select="weight_target_basis"/>
+				    <xsl:if test="weight_target_basis='' or not(weight_target_basis)">
+					<xsl:text> </xsl:text>
+				</xsl:if>
+			   </td>
+			   <td align="center">
+				    <xsl:value-of select="weight_unit"/>
+				    <xsl:if test="weight_unit='' or not(weight_unit)">
+					<xsl:text> </xsl:text>
+				</xsl:if>
+			   </td>
+		</tr>
+	</xsl:template>
+</xsl:stylesheet>]]></xsl_stylesheet>
+  <name>BOM Weight Goals Rollup Report</name>
+ </Item>
+</AML>

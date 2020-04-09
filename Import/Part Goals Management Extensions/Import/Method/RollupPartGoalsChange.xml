@@ -1,0 +1,73 @@
+﻿<AML>
+ <Item type="Method" id="FEF5CEE69AE649B994801A519FDC64A4" action="add">
+  <comments>utilizes rollup configuration and generic rollup services.</comments>
+  <execution_allowed_to keyed_name="World" type="Identity">A73B655731924CD0B027E4F4D5FCC0A9</execution_allowed_to>
+  <method_code><![CDATA[// context Item:  'Part Goal'
+// event: onAfterUpdate
+// onAfterAdd, and onBeforeDelete are not relevant, since these should not be added / deleted manually.
+
+//System.Diagnostics.Debugger.Launch();System.Diagnostics.Debugger.Break();
+
+string partGoalId = this.getID();
+
+// ## hardcoded for debugging
+// partGoalId = "D54AF523CC1C4CF39F5A971B6F660D8E";
+
+// get Parent Part item
+string aml = "";
+aml += "<Item type='Part Goal' action='get' select='source_id(name,item_number),goal' id='"+partGoalId+"'>";
+aml += "</Item>";
+Item parentPart = this.newItem("");
+parentPart.loadAML(aml);
+parentPart = parentPart.apply().getPropertyItem("source_id");
+
+string rollupType = this.getProperty("goal","");
+
+// Read configuration
+Item callMethod = this.newItem("Method", "ruc_GetRollupDefintion");
+callMethod.setAttribute("rollupType",this.getProperty("goal",""));
+callMethod.setAttribute("rollupNodeItemType",parentPart.getType());
+callMethod.setAttribute("rollupStructRelshipType","Part BOM");
+callMethod.setAttribute("rollupValuesRelshipType",this.getType());
+
+//--------------------------
+// ## args hordcoded for debugging - when using Run Server Method action
+// rollupType = "Cost";
+// callMethod = this.newItem("Method", "ruc_GetRollupDefintion");
+// callMethod.setAttribute("rollupType",rollupType);
+// callMethod.setAttribute("rollupNodeItemType","Part");
+// callMethod.setAttribute("rollupStructRelshipType","Part BOM");
+// callMethod.setAttribute("rollupValuesRelshipType","Part Goal");
+//--------------------------
+
+Item rollupDefinition = callMethod.apply();
+if (rollupDefinition.getItemCount() != 1) {
+    return this.getInnovator().newError("Error reading rollup configuration: Missing or multiple configurations for rollup structure '"+callMethod.getAttribute("rollupStructRelshipType","-")+"'");
+}
+
+string rollupServiceMethod = rollupDefinition.getProperty("rollup_service_method","");
+
+// --- run generic rollup service method ---
+// rollupType                       *required
+// rollupStartNodeId                *required
+// rollupStartNodeItemType          *required
+// resolutionDirection              *required     --> can be up or down(=default)
+// applyResolutionFilter            optional      --> as defined in rollup configuration
+// skipFilterOnImmediateNextLevel   optional      --> skips filter on next level to ensure its next parents or next children are always processed
+// rollupNodeCallbackMethods        optional      --> comma separated list of method names (overrides configured methods)
+
+rollupDefinition.setAttribute("rollupType", rollupType);
+rollupDefinition.setAttribute("rollupStartNodeId", parentPart.getID());
+rollupDefinition.setAttribute("rollupStartNodeItemType", parentPart.getType());
+rollupDefinition.setAttribute("resolutionDirection", "up");
+rollupDefinition.setAttribute("applyResolutionFilter", "1");
+rollupDefinition.setAttribute("skipFilterOnImmediateNextLevel", "1");
+
+Item res = rollupDefinition.apply(rollupServiceMethod);
+
+return res;
+]]></method_code>
+  <method_type>C#</method_type>
+  <name>RollupPartGoalsChange</name>
+ </Item>
+</AML>

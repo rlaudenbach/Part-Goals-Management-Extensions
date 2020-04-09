@@ -1,0 +1,23 @@
+﻿<AML>
+ <Item type="Method" id="E85BC9686FB340C3B68271D59B46D3D5" action="add">
+  <comments>called from an action</comments>
+  <execution_allowed_to keyed_name="Administrators" type="Identity">2618D6F5A90949BAA7E920D1B04C7EE1</execution_allowed_to>
+  <method_code><![CDATA[var rollupStructRelshipType = "Part BOM";
+var partId = this.getID();
+var partType = this.getType();
+var rollupDataModelAction = "add";
+var rollupStructRelshipType = "Part BOM";
+
+var args = {
+	itemTypeName: partType,
+	itemId: partId,
+	dataModelAction: rollupDataModelAction,
+	rollupStructRelshipType: rollupStructRelshipType
+};
+aras.evalItemMethod('ruc_AddOrDeleteRollupRels', null, args);
+
+return;]]></method_code>
+  <method_type>JavaScript</method_type>
+  <name>Add_PartGoalsToAllChildren_a</name>
+ </Item>
+</AML>

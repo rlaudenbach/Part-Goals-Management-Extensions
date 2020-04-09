@@ -1,0 +1,368 @@
+﻿<AML>
+ <Item type="Method" id="B2B1BE6BCAE248F7AF5A210729B1D263" action="add">
+  <comments>Resolves rollup structure up from a given node id (generic method). Runs callback method for each resolved node, if provided</comments>
+  <execution_allowed_to keyed_name="World" type="Identity">A73B655731924CD0B027E4F4D5FCC0A9</execution_allowed_to>
+  <method_code><![CDATA[// context item must be:  'ruc_Definition' (structure)
+
+// System.Diagnostics.Debugger.Launch();System.Diagnostics.Debugger.Break();
+
+// MUST have these Args passed in  (as custom attributes):
+// rollupStartNodeId          *required
+// rollupStartNodeItemType    *required
+// rollupType                 *required     --> can be "*"
+// resolutionDirection        *required     --> can be up or down(=default)
+// levelProcessingDirection    optional     --> can be up or down.  default = resolutionDirection
+// processLeafLevelOnly        optional     --> can "1" oe "0"(=default) - use, if resolutionDirection = down
+// applyResolutionFilter       optional     --> can be "1" or "0". filter is defined in rollup configuration
+// rollupNodeCallbackMethods   optional     --> comma separated list of method names (overrides configured methods)
+
+// --- read Args passed in ---
+string debugNodeId = this.getAttribute("debugNodeId", "");
+string rollupStartNodeId = this.getAttribute("rollupStartNodeId", "");
+string rollupStartNodeItemType = this.getAttribute("rollupStartNodeItemType", "");
+
+GlobalVars.rollupType = this.getAttribute("rollupType", "");
+GlobalVars.applyResolutionFilter = (this.getAttribute("applyResolutionFilter", "0") == "1");
+GlobalVars.skipFilterOnImmediateNextLevel = (this.getAttribute("skipFilterOnImmediateNextLevel", "0") == "1");
+GlobalVars.resolutionDirection = this.getAttribute("resolutionDirection", "down");
+GlobalVars.levelProcessingDirection = this.getAttribute("levelProcessingDirection", GlobalVars.resolutionDirection);
+GlobalVars.processLeafLevelOnly = (this.getAttribute("processLeafLevelOnly", "0") == "1");
+GlobalVars.rollupNodeCallbackMethods = this.getAttribute("rollupNodeCallbackMethods", "");
+
+if (rollupStartNodeId == "" || rollupStartNodeItemType == "" || GlobalVars.rollupType == "" || GlobalVars.resolutionDirection == "") {
+    return this.getInnovator().newError("Generic method 'ruc_StructResolutionRunCalbacks' did not recive all required arguments !");
+}
+
+// if (rollupStartNodeId == debugNodeId) {
+//     System.Diagnostics.Debugger.Launch();System.Diagnostics.Debugger.Break();
+// }
+
+// --- read from configuration context ---
+GlobalVars.rollupNodeItemType = this.getProperty("rollup_node_item_type","");
+GlobalVars.rollupStructRelshipType = this.getProperty("rollup_struct_relship_type","");
+GlobalVars.rollupValuesRelshipType = this.getProperty("rollup_values_relship_type","");
+GlobalVars.rollupTypePropName = this.getProperty("rollup_type_prop","");
+GlobalVars.rollupRelshipUnitPropName = this.getProperty("rollup_relship_unit_prop","");
+
+if (GlobalVars.rollupNodeItemType != rollupStartNodeItemType) {
+    return this.getInnovator().newError("StartNodeItemType '"+rollupStartNodeItemType+"' does not match the configured rollupNodeItemType '"+GlobalVars.rollupNodeItemType+"' !");
+}
+Item rollupConfigCollection;
+
+// process rollupTypes wildcard "*"
+string[] rollupTypes = {""};
+if (GlobalVars.rollupType == "*") {
+    // read all rollup types from configuration
+    rollupConfigCollection = this.getItemsByXPath("//Item[@type='ruc_TypeDefinition']");
+    rollupTypes = GetCommaSeparatedStringOfPropertyValues(rollupConfigCollection, "rollup_type").Split(',');
+}
+else {
+    rollupTypes[0] = GlobalVars.rollupType;
+}
+
+
+for (int t=0; t<rollupTypes.Length; t++) {
+    GlobalVars.rollupType = rollupTypes[t];
+
+    // read more configurations ...
+    string rollupTypeXPathCondition = "";
+    if (GlobalVars.rollupType != "") {rollupTypeXPathCondition = " and rollup_type='"+GlobalVars.rollupType+"'";}
+    
+    // from 'ruc_TypeDefinition'
+    rollupConfigCollection = this.getItemsByXPath("//Item[@type='ruc_TypeDefinition'"+rollupTypeXPathCondition+"]");
+    GlobalVars.rollupNodeFilterCondition = rollupConfigCollection.getProperty("rollup_node_filter_condition","");
+    GlobalVars.rollupStructFilterCondition = rollupConfigCollection.getProperty("rollup_struct_filter_condition","");
+    GlobalVars.rollupUnitPropName = rollupConfigCollection.getProperty("rollup_unit_prop","");
+    GlobalVars.rollupUnit = rollupConfigCollection.getProperty("rollup_unit","");
+    
+    // from 'ruc_TypeCalculatedValue'
+    rollupConfigCollection = this.getItemsByXPath("//Item[@type='ruc_TypeDefinition'"+rollupTypeXPathCondition+"]/*/Item[@type='ruc_TypeCalculatedValue']");
+    if (GlobalVars.rollupNodeCallbackMethods == "") {
+        GlobalVars.rollupNodeCallbackMethods = GetCommaSeparatedStringOfPropertyValues(rollupConfigCollection, "rollup_single_node_method");
+    }
+    //GlobalVars.rollupValuePropName = rollupConfigCollection.getProperty("rollup_value_prop","");
+    GlobalVars.rollupValuePropNames = GetCommaSeparatedStringOfPropertyValues(rollupConfigCollection, "rollup_value_prop");
+    GlobalVars.rollupBasisPropNames = GetCommaSeparatedStringOfPropertyValues(rollupConfigCollection, "rollup_basis_prop");
+    GlobalVars.rollupCalculatedValuePropNames = GetCommaSeparatedStringOfPropertyValues(rollupConfigCollection, "rollup_calculated_value_prop");
+    GlobalVars.rollupCalculatedBasisLabels = GetCommaSeparatedStringOfPropertyValues(rollupConfigCollection, "rollup_calculated_basis_label");
+    GlobalVars.rollupRollupQuantityPropNames = GetCommaSeparatedStringOfPropertyValues(rollupConfigCollection, "rollup_quantity_prop");
+    
+    // from 'ruc_TypeManualValues'
+    rollupConfigCollection = this.getItemsByXPath("//Item[@type='ruc_TypeDefinition'"+rollupTypeXPathCondition+"]/*/Item[@type='ruc_TypeCalculatedValue']/*/Item[@type='ruc_TypeManualValues']");
+    GlobalVars.rollupManualValuePropNames = GetCommaSeparatedStringOfPropertyValues(rollupConfigCollection, "rollup_manual_value_prop");
+    GlobalVars.rollupManualBasisLabels = GetCommaSeparatedStringOfPropertyValues(rollupConfigCollection, "rollup_manual_basis_label");
+    GlobalVars.rollupManualRelatedCaclulatedProps = GetCommaSeparatedStringOfPropertyValues(rollupConfigCollection, "rollup_related_calculated_prop");
+    
+    // Grant Identity (run all as "Super User" to ignore permissions)
+    Aras.Server.Security.Identity identity = Aras.Server.Security.Identity.GetByName("Super User");
+    bool permsWasSet = Aras.Server.Security.Permissions.GrantIdentity(identity);
+    
+    // Build global array of NodeIds by levels
+    GlobalVars.NodeIdsByLevel = new ArrayList();
+    GlobalVars.callNodeItemMethod = this.newItem("");
+    
+    Item res;
+    
+    // add startNodeId as lowest level to be include in processing
+    GlobalVars.NodeIdsByLevel.Add(rollupStartNodeId);
+    int level = 0;
+    
+    // cache all node ids in an array by level in direction defined by resolutionDirection (up or down)
+    if (GlobalVars.skipFilterOnImmediateNextLevel) {
+                GlobalVars.skipFilter = true;
+    }
+    ResolveStructure(rollupStartNodeId, level);  // recursively - bottom up
+    
+    
+    // Process global array of NodeIds by levels
+    res = ProcessNodesLevelByLevel();
+    if (res.isError()) {return res;}
+    
+    // Reset ganted Itentity
+    if (permsWasSet) {Aras.Server.Security.Permissions.RevokeIdentity(identity);}
+    
+}
+return this;
+}
+
+//---------------------------------------------------------------------------
+// Global Variables
+public static class GlobalVars
+{
+    // Global static variable.
+	public static string rollupType;
+	public static bool applyResolutionFilter;
+	public static bool skipFilterOnImmediateNextLevel;
+	public static bool skipFilter;
+	public static string resolutionDirection;
+	public static string levelProcessingDirection;
+	public static bool processLeafLevelOnly;
+	public static string rollupNodeItemType;
+	public static string rollupNodeItemId;
+	public static string rollupNodeFilterCondition;
+	public static string rollupStructRelshipType;
+	public static string rollupValuesRelshipType;
+	public static string rollupStructFilterCondition;
+	public static string rollupNodeCallbackMethods;
+	public static ArrayList NodeIdsByLevel;
+	public static Item callNodeItemMethod;
+	public static string rollupTypePropName;
+	public static string rollupBasisPropNames;
+	public static string rollupCalculatedValuePropNames;
+	public static string rollupCalculatedBasisLabels;
+	public static string rollupManualValuePropNames;
+	public static string rollupManualBasisLabels;
+	public static string rollupManualRelatedCaclulatedProps;
+	public static string rollupValuePropNames;
+	public static string rollupRollupQuantityPropNames;
+	public static string rollupRelshipUnitPropName;
+	public static string rollupUnitPropName;
+	public static string rollupUnit;
+}
+
+// ---------------------------
+private string GetNextLevelNodeIds (string thisLevelNodeId) {
+    
+    string aml = "";
+    string idPropName = "";
+    aml += "<Item type='"+GlobalVars.rollupStructRelshipType+"' action='get' select='source_id,related_id,state' >";
+    if (GlobalVars.resolutionDirection  == "up") {
+        aml += " <related_id>"+thisLevelNodeId+"</related_id>";
+        idPropName = "source_id";
+    }
+    else {
+        aml += " <source_id>"+thisLevelNodeId+"</source_id>";
+        idPropName = "related_id";
+    }
+    if (!GlobalVars.skipFilter && GlobalVars.applyResolutionFilter && GlobalVars.rollupStructFilterCondition != "") {
+        aml += GlobalVars.rollupStructFilterCondition;
+    }
+    if (GlobalVars.resolutionDirection  == "up") {
+        aml += " <source_id>";
+    }
+    else {
+        aml += " <related_id>";
+    }
+    aml += "  <Item type='"+GlobalVars.rollupNodeItemType+"' action='get' select='id,state'>";
+    if (!GlobalVars.skipFilter && GlobalVars.applyResolutionFilter && GlobalVars.rollupNodeFilterCondition != "") {
+        aml += GlobalVars.rollupNodeFilterCondition;
+    }
+    aml += "  </Item>";
+    if (GlobalVars.resolutionDirection  == "up") {
+        aml += " </source_id>";
+    }
+    else {
+        aml += " </related_id>";
+    }
+    aml += "</Item>";
+    
+    Item nextLevelFilteredPartBOMsWithParents = this.newItem("");
+    nextLevelFilteredPartBOMsWithParents.loadAML(aml);
+    
+    nextLevelFilteredPartBOMsWithParents = nextLevelFilteredPartBOMsWithParents.apply();
+    string NodeIds = "";
+    string sepChar = "";
+    for (int i=0; i<nextLevelFilteredPartBOMsWithParents.getItemCount(); i++) {
+        Item nextLevelFilteredPartBOMsWithParent = nextLevelFilteredPartBOMsWithParents.getItemByIndex(i);
+        NodeIds +=  sepChar + nextLevelFilteredPartBOMsWithParent.getProperty(idPropName,"invalid");
+        sepChar = ",";
+    }
+ 
+    return NodeIds;
+}
+
+// ---------------------------
+private string GetCommaSeparatedStringOfPropertyValues (Item ItemCollection, string propName) {
+    // find all unique property values
+    string commaSepPropValuesString = "";
+    string sepChar = "";
+    for (int i=0; i<ItemCollection.getItemCount(); i++) {
+        Item itm = ItemCollection.getItemByIndex(i);
+    
+        string propValue = itm.getProperty(propName,"");
+        if (commaSepPropValuesString.IndexOf(sepChar+propValue) < 0) {
+            commaSepPropValuesString += sepChar + propValue;
+            sepChar = ",";
+        }
+    }
+    return commaSepPropValuesString;
+}
+
+// ---------------------------
+private void ResolveStructure (string NodeIds, int level) {
+    string[] nextLevelNodeIds_a = NodeIds.Split(',');
+    
+    if (nextLevelNodeIds_a[0] == "") {
+		level--;
+		return;
+	}
+    
+    level++;
+    
+    for (int i=0; i<nextLevelNodeIds_a.Length; i++) {
+        string nextLevelNodeIds = GetNextLevelNodeIds(nextLevelNodeIds_a[i]);
+		
+		if (nextLevelNodeIds != "") {
+			if (GlobalVars.NodeIdsByLevel.Count == level) {
+				GlobalVars.NodeIdsByLevel.Add(nextLevelNodeIds);
+			}
+			else {
+				var tmpListElement = GlobalVars.NodeIdsByLevel[level];
+				GlobalVars.NodeIdsByLevel[level] = (string)tmpListElement + "," + nextLevelNodeIds;
+			}	
+		}
+        
+        ResolveStructure (nextLevelNodeIds, level);
+
+    }
+}
+
+// ---------------------------
+private Item ProcessNodesLevelByLevel () {
+    Item res = this;
+    
+    int noOfLevelsToProcess = GlobalVars.NodeIdsByLevel.Count;
+    
+    if (GlobalVars.skipFilterOnImmediateNextLevel && GlobalVars.processLeafLevelOnly) {
+        GlobalVars.levelProcessingDirection = "up";
+        noOfLevelsToProcess = 2;
+    }
+    if (!GlobalVars.skipFilterOnImmediateNextLevel && GlobalVars.processLeafLevelOnly) {
+        GlobalVars.levelProcessingDirection = "up";
+        noOfLevelsToProcess = 1;
+    }
+    if (GlobalVars.levelProcessingDirection == GlobalVars.resolutionDirection) {
+        for (int l=0; l<noOfLevelsToProcess && !res.isError(); l++) {
+            res = CallSingleNodeMethods(l);
+        }    
+    }
+    else {
+        for (int l=noOfLevelsToProcess-1; l>=0  && !res.isError(); l--) {
+            res = CallSingleNodeMethods(l);
+        }
+    }
+    return res;
+}
+
+// ---------------------------
+private Item CallSingleNodeMethods (int l) {
+    
+    if (GlobalVars.rollupNodeCallbackMethods != "" ) {
+        string[] rollupSingleNodeMethods_a = GlobalVars.rollupNodeCallbackMethods.Split(',');
+        string[] rollupValuePropNames_a = GlobalVars.rollupValuePropNames.Split(',');
+        string[] rollupBasisPropNames_a =  GlobalVars.rollupBasisPropNames.Split(',');
+        string[] rollupCalculatedValuePropNames_a = GlobalVars.rollupCalculatedValuePropNames.Split(',');
+        string[] rollupCalculatedBasisLabels_a = GlobalVars.rollupCalculatedBasisLabels.Split(',');
+        string[] rollupRollupQuantityPropNames_a = GlobalVars.rollupRollupQuantityPropNames.Split(',');
+
+        for (int c=0; c<rollupValuePropNames_a.Length; c++) {
+            
+            if (rollupSingleNodeMethods_a[0] != "") {
+                string levelNodeIds = (string)GlobalVars.NodeIdsByLevel[l];
+                string[] levelNodeIds_a = levelNodeIds.Split(',');
+                for (int p=0; p<levelNodeIds_a.Length; p++) {
+                    
+                    if (levelNodeIds_a[0] != "") {
+                        //System.Diagnostics.Debugger.Launch();System.Diagnostics.Debugger.Break();
+            
+                        // run method
+                        GlobalVars.callNodeItemMethod.setAttribute("type", GlobalVars.rollupNodeItemType);
+                        
+                        // additional args for callback method (with relevant rollup configuration settings)
+                        GlobalVars.callNodeItemMethod.setAttribute("rollupType", GlobalVars.rollupType);
+                        GlobalVars.callNodeItemMethod.setAttribute("rollupTypePropName", GlobalVars.rollupTypePropName);
+                        GlobalVars.callNodeItemMethod.setAttribute("rollupStructRelshipType", GlobalVars.rollupStructRelshipType);
+                        GlobalVars.callNodeItemMethod.setAttribute("rollupValuesRelshipType", GlobalVars.rollupValuesRelshipType);
+                        GlobalVars.callNodeItemMethod.setAttribute("rollupRelshipUnitPropName", GlobalVars.rollupRelshipUnitPropName);
+                        GlobalVars.callNodeItemMethod.setAttribute("rollupUnitPropName", GlobalVars.rollupUnitPropName);
+                        GlobalVars.callNodeItemMethod.setAttribute("rollupUnit", GlobalVars.rollupUnit);
+                        
+                        GlobalVars.callNodeItemMethod.setAttribute("rollupValuePropName", rollupValuePropNames_a[c]);
+                        GlobalVars.callNodeItemMethod.setAttribute("rollupBasisPropName", rollupBasisPropNames_a[c]);
+                        GlobalVars.callNodeItemMethod.setAttribute("rollupCalculatedValuePropName", rollupCalculatedValuePropNames_a[c]);
+                        GlobalVars.callNodeItemMethod.setAttribute("rollupCalculatedBasisLabel", rollupCalculatedBasisLabels_a[c]);
+                        GlobalVars.callNodeItemMethod.setAttribute("rollupRollupQuantityPropName", rollupRollupQuantityPropNames_a[c]);
+
+                        string[] rollupManualValuePropNames_a = GlobalVars.rollupManualValuePropNames.Split(',');
+                        string[] rollupManualBasisLabels_a = GlobalVars.rollupManualBasisLabels.Split(',');
+                        string[] rollupManualRelatedCaclulatedProps_a = GlobalVars.rollupManualRelatedCaclulatedProps.Split(',');
+                        string sepChar = "";
+                        string valProps = "";
+                        string basisLabels = "";
+                        for (int i=0; i<rollupManualValuePropNames_a.Length; i++) {
+                            if (rollupManualRelatedCaclulatedProps_a[i] == rollupCalculatedValuePropNames_a[c] ) {
+                                valProps += sepChar+rollupManualValuePropNames_a[i]; 
+                                basisLabels += sepChar+rollupManualBasisLabels_a[i]; 
+                                sepChar = ",";
+                            }
+                            GlobalVars.callNodeItemMethod.setAttribute("rollupManualValuePropNames", valProps);
+                            GlobalVars.callNodeItemMethod.setAttribute("rollupManualBasisLabels", basisLabels);
+                        }
+                        GlobalVars.callNodeItemMethod.setID(levelNodeIds_a[p]);
+                        Item res;
+                        if (rollupSingleNodeMethods_a.Length != rollupValuePropNames_a.Length) {
+                            // run this configuration with all listed methods
+                            for (int m=0; m<rollupSingleNodeMethods_a.Length; m++) {
+                                res = GlobalVars.callNodeItemMethod.apply(rollupSingleNodeMethods_a[m]);
+                                if (res.isError()) {return res;}
+                            }
+                        }
+                        else {
+                            // every configuration has its own method
+                            res = GlobalVars.callNodeItemMethod.apply(rollupSingleNodeMethods_a[c]);
+                            if (res.isError()) {return res;}
+                        }
+                    }
+                }
+            }
+        }
+    }
+    return this;
+}
+
+private void EoM() {
+]]></method_code>
+  <method_type>C#</method_type>
+  <name>ruc_StructResolutionRunCallbacks</name>
+ </Item>
+</AML>

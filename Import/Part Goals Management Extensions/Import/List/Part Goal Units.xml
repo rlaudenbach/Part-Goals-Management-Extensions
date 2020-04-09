@@ -1,0 +1,49 @@
+﻿<AML>
+ <Item type="List" id="1792BD09261342FCBBD2B9191909B312" action="add">
+  <name>Part Goal Units</name>
+  <Relationships>
+   <Item type="Filter Value" id="D4A2AEF0B9A74E71B65DFB656BBB608B" action="add">
+    <filter>Cost</filter>
+    <label xml:lang="en">USD</label>
+    <sort_order>128</sort_order>
+    <source_id keyed_name="Part Goal Units" type="List">1792BD09261342FCBBD2B9191909B312</source_id>
+    <value>USD</value>
+   </Item>
+   <Item type="Filter Value" id="168F2735F70E49B89A41A728505541E8" action="add">
+    <filter>Cost</filter>
+    <label xml:lang="en">YEN</label>
+    <sort_order>256</sort_order>
+    <source_id keyed_name="Part Goal Units" type="List">1792BD09261342FCBBD2B9191909B312</source_id>
+    <value>YEN</value>
+   </Item>
+   <Item type="Filter Value" id="E0E0C104BEEE4876B9855F25B45D39AE" action="add">
+    <filter>Cost</filter>
+    <label xml:lang="en">EUR</label>
+    <sort_order>384</sort_order>
+    <source_id keyed_name="Part Goal Units" type="List">1792BD09261342FCBBD2B9191909B312</source_id>
+    <value>EUR</value>
+   </Item>
+   <Item type="Filter Value" id="016D667DFA304E8E805292FEA4FDF0B7" action="add">
+    <filter>Weight</filter>
+    <label xml:lang="en">g</label>
+    <sort_order>512</sort_order>
+    <source_id keyed_name="Part Goal Units" type="List">1792BD09261342FCBBD2B9191909B312</source_id>
+    <value>g</value>
+   </Item>
+   <Item type="Filter Value" id="487C2137A484490499EA8B8AC1B2E771" action="add">
+    <filter>Weight</filter>
+    <label xml:lang="en">kg</label>
+    <sort_order>640</sort_order>
+    <source_id keyed_name="Part Goal Units" type="List">1792BD09261342FCBBD2B9191909B312</source_id>
+    <value>kg</value>
+   </Item>
+   <Item type="Filter Value" id="1FDA147A159D4BE7BB2F4F1532898781" action="add">
+    <filter>Weight</filter>
+    <label xml:lang="en">t</label>
+    <sort_order>768</sort_order>
+    <source_id keyed_name="Part Goal Units" type="List">1792BD09261342FCBBD2B9191909B312</source_id>
+    <value>t</value>
+   </Item>
+  </Relationships>
+ </Item>
+</AML>

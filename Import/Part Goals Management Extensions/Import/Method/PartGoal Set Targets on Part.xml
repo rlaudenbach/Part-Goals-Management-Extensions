@@ -1,0 +1,26 @@
+﻿<AML>
+ <Item type="Method" id="496016CDC901444CAC7B1BBE921086E8" action="add">
+  <comments>onAfterUpdate</comments>
+  <execution_allowed_to keyed_name="World" type="Identity">A73B655731924CD0B027E4F4D5FCC0A9</execution_allowed_to>
+  <method_code><![CDATA[//System.Diagnostics.Debugger.Launch();System.Diagnostics.Debugger.Break();
+string SQL = "UPDATE [Part]";
+string targetVal = this.getProperty("target_value","");
+if (this.getProperty("goal","") == "Cost" && targetVal != "") {
+    SQL += " SET [Part].cost_target="+targetVal+" WHERE [Part].id='"+this.getProperty("source_id","invalid")+"'";
+}
+if (this.getProperty("goal","") == "Cost" && targetVal == "") {
+    SQL += " SET [Part].cost_target = null";
+}
+
+if (this.getProperty("goal","") == "Weight" && targetVal != "") {
+    SQL += " SET [Part].weight_target="+targetVal+" WHERE [Part].id='"+this.getProperty("source_id","invalid")+"'";
+}
+if (this.getProperty("goal","") == "Weight" && targetVal == "") {
+    SQL += " SET [Part].weight_target = null";
+}
+this.getInnovator().applySQL(SQL);
+return this;]]></method_code>
+  <method_type>C#</method_type>
+  <name>PartGoal Set Targets on Part</name>
+ </Item>
+</AML>

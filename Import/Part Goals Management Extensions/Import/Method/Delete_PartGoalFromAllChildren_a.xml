@@ -1,0 +1,23 @@
+﻿<AML>
+ <Item type="Method" id="9932B4CB41BE4F85BEE4DF189C16667D" action="add">
+  <execution_allowed_to keyed_name="Administrators" type="Identity">2618D6F5A90949BAA7E920D1B04C7EE1</execution_allowed_to>
+  <method_code><![CDATA[var rollupStructRelshipType = "Part BOM";
+var partId = this.getID();
+var partType = this.getType();
+var rollupDataModelAction = "delete";
+var rollupStructRelshipType = "Part BOM";
+
+
+var args = {
+	itemTypeName: partType,
+	itemId: partId,
+	dataModelAction: rollupDataModelAction,
+	rollupStructRelshipType: rollupStructRelshipType
+};
+aras.evalItemMethod('ruc_AddOrDeleteRollupRels', null, args);
+
+return;]]></method_code>
+  <method_type>JavaScript</method_type>
+  <name>Delete_PartGoalsFromAllChildrn_a</name>
+ </Item>
+</AML>

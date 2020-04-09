@@ -1,0 +1,91 @@
+﻿<AML>
+ <Item type="Method" id="77D2E8ACA5D34D57BDE0AD02ECC96DAD" action="add">
+  <execution_allowed_to keyed_name="World" type="Identity">A73B655731924CD0B027E4F4D5FCC0A9</execution_allowed_to>
+  <method_code><![CDATA[	var item = document.item;
+	var changecost_target = true;
+	if (aras.isTempEx(item)) {
+	        return;
+	}
+	if (item) {
+		//property "cost_target,cost_target_basis,weight_target,weight_target_basis" must be updated from server (IR-007857)
+		var soapBody =
+  "<Item type=\"Part\" action=\"get\" select=\"cost_target,cost_target_basis,weight_target,weight_target_basis\">" +
+  "<id>" + item.getAttribute("id") + "</id>" +
+  "</Item>";
+		var soapRes = aras.soapSend('ApplyItem', soapBody, '', false);   //url=='' - use default server url; saveChanges==false - skip client cache  
+		var serverPart;
+		if (soapRes.getFaultCode() === 0) {
+			serverPart = soapRes.getResult().selectSingleNode("Item");
+			var cost_target = aras.getItemProperty(serverPart, "cost_target");
+			//fill "cost_target" field in item's form
+			var fieldcost_target = getFieldByName("cost_target");
+			var elements = fieldcost_target.getElementsByTagName("input");
+			for (var i = 0; i < elements.length; i++) {
+				// Look for a custom attribute named "populate"
+				//if (elements[i].populate == "1") 
+				//{
+				// The property name to use is the input name of the field
+				var propName = elements[i].name;
+				if (propName == "cost_target") {
+					elements[i].value = cost_target;
+					changecost_target = false;
+					break;
+				}
+				//}
+			}
+		}
+		else {
+			aras.AlertError("Exception in Goal Basis refresh", soapRes.getFaultDetails(), soapRes.getFaultString());
+			return;
+		}
+
+		//Erase "cost_target" item properties, to avoid unwanted saving (IR-007857)
+		var node = item.selectSingleNode("cost_target");
+		if (node) {
+			item.removeChild(node);
+		}
+		//Erase "weight_target" item properties, to avoid unwanted saving (IR-007857)
+		var node = item.selectSingleNode("weight_target");
+		if (node) {
+			item.removeChild(node);
+		}
+
+		var innovator = new aras.getMostTopWindowWithAras(window).Innovator();
+		var partGoalsListId = aras.getListId("Part Goals");
+		var goalListValues = aras.getListValues(partGoalsListId, false);
+
+		for (var i = 0; i < goalListValues.length; i++) {
+
+			var partGoalsListValue = aras.getItemProperty(goalListValues[i], "value");
+			// See if there is a basis field for this partGoalsListValue
+			var basis_field = document.getElementById(partGoalsListValue.toLowerCase() + "_target_basis");
+			// If the basis value is not empty, populate the field
+			if (basis_field) {
+				var basis = document.thisItem.getProperty(partGoalsListValue.toLowerCase() + "_target_basis");
+        var textPropName = aras.browserHelper.getTextContentPropertyName();
+				if (basis !== undefined && basis !== "" && changecost_target)
+					basis_field[textPropName] = "(" + basis + ")";
+				else {
+					if (undefined !== serverPart) {
+						basis = aras.getItemProperty(serverPart, partGoalsListValue.toLowerCase() + "_target_basis");
+						if (undefined !== basis && "" !== basis) {
+							basis_field[textPropName] = "(" + basis + ")";
+						}
+						else {
+							basis_field[textPropName] = "";
+						}
+					}
+					else {
+						basis_field[textPropName] = "";
+					}
+				}
+			}
+			basis_field = null;
+		}
+	}
+
+]]></method_code>
+  <method_type>JavaScript</method_type>
+  <name>Show Goal Target Basis</name>
+ </Item>
+</AML>

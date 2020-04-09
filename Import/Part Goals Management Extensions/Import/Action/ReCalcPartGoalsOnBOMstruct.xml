@@ -1,0 +1,15 @@
+﻿<AML>
+ <Item type="Action" id="7811AE9E9B5D47BF99A2236FDAD6105F" action="add">
+  <item_query>&lt;Item type="{@type}" id="{@id}" levels= "1" action="get" /&gt;</item_query>
+  <label xml:lang="en">Calculate All Part Goals in BOM</label>
+  <location>client</location>
+  <method keyed_name="ReCalcPartGoalsOnBOMstruct_a" type="Method">
+   <Item type="Method" action="get" select="id">
+    <name>ReCalcPartGoalsOnBOMstruct_a</name>
+   </Item>
+  </method>
+  <target>none</target>
+  <type>item</type>
+  <name>ReCalcPartGoalsOnBOMstruct</name>
+ </Item>
+</AML>

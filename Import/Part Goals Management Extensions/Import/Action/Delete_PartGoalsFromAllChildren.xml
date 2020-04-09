@@ -1,0 +1,15 @@
+﻿<AML>
+ <Item type="Action" id="2D2BB01DE8734A55A9D04D642B66E069" action="add">
+  <item_query>&lt;Item type="{@type}" id="{@id}" levels= "1" action="get" /&gt;</item_query>
+  <label xml:lang="en">Delete PartGoals From Structure (down)</label>
+  <location>client</location>
+  <method keyed_name="Delete_PartGoalsFromAllChildrn_a" type="Method">
+   <Item type="Method" action="get" select="id">
+    <name>Delete_PartGoalsFromAllChildrn_a</name>
+   </Item>
+  </method>
+  <target>none</target>
+  <type>item</type>
+  <name>Delete_PartGoalsFromAllChildren</name>
+ </Item>
+</AML>

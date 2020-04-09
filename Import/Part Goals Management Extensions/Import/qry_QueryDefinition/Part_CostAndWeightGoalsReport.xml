@@ -1,0 +1,224 @@
+﻿<AML>
+ <Item type="qry_QueryDefinition" id="F67B2C5D10E0411EBEB665A36EDC9FE0" action="add">
+  <description>Cloned from PE_costingReport</description>
+  <name>Part_CostAndWeightGoalsReport</name>
+  <Relationships>
+   <Item type="qry_QueryItem" id="659FBDF63A234B47B138E04A0DB43C0B" action="add">
+    <item_type keyed_name="Part" type="ItemType" name="Part">4F1AC04A2B484F3ABA4E20DB63808A88</item_type>
+    <ref_id>443820D6457E42D2BD2A83A374E7EAFB</ref_id>
+    <sort_order>128</sort_order>
+    <source_id keyed_name="Part_CostAndWeightGoalsReport" type="qry_QueryDefinition">F67B2C5D10E0411EBEB665A36EDC9FE0</source_id>
+    <alias>RootPart</alias>
+    <Relationships>
+     <Item type="qry_QueryItemSelectProperty" id="FC31591257EA47A9BC3A394539C11B3A" action="add">
+      <property_name>item_number</property_name>
+      <sort_order>128</sort_order>
+      <source_id keyed_name="RootPart" type="qry_QueryItem">659FBDF63A234B47B138E04A0DB43C0B</source_id>
+     </Item>
+     <Item type="qry_QueryItemSelectProperty" id="E8A6D883AF9F4BF8B7B60D8908AEDAEA" action="add">
+      <property_name>name</property_name>
+      <sort_order>256</sort_order>
+      <source_id keyed_name="RootPart" type="qry_QueryItem">659FBDF63A234B47B138E04A0DB43C0B</source_id>
+     </Item>
+     <Item type="qry_QueryItemSelectProperty" id="F2878D95979E477385D7773FF295686F" action="add">
+      <property_name>cost</property_name>
+      <sort_order>384</sort_order>
+      <source_id keyed_name="RootPart" type="qry_QueryItem">659FBDF63A234B47B138E04A0DB43C0B</source_id>
+     </Item>
+     <Item type="qry_QueryItemSelectProperty" id="A70A25C4485141E3B3EF6018759DE903" action="add">
+      <property_name>cost_basis</property_name>
+      <sort_order>512</sort_order>
+      <source_id keyed_name="RootPart" type="qry_QueryItem">659FBDF63A234B47B138E04A0DB43C0B</source_id>
+     </Item>
+     <Item type="qry_QueryItemSelectProperty" id="8F886670D44D4713B8CDC526C7ADB643" action="add">
+      <property_name>cost_unit</property_name>
+      <sort_order>640</sort_order>
+      <source_id keyed_name="RootPart" type="qry_QueryItem">659FBDF63A234B47B138E04A0DB43C0B</source_id>
+     </Item>
+     <Item type="qry_QueryItemSelectProperty" id="C0930E893E1E4B819382C02F027D8C14" action="add">
+      <property_name>cost_target</property_name>
+      <sort_order>768</sort_order>
+      <source_id keyed_name="RootPart" type="qry_QueryItem">659FBDF63A234B47B138E04A0DB43C0B</source_id>
+     </Item>
+     <Item type="qry_QueryItemSelectProperty" id="229105AB5A8345BA84493C4976CED006" action="add">
+      <property_name>weight</property_name>
+      <sort_order>896</sort_order>
+      <source_id keyed_name="RootPart" type="qry_QueryItem">659FBDF63A234B47B138E04A0DB43C0B</source_id>
+     </Item>
+     <Item type="qry_QueryItemSelectProperty" id="0332723D9CF248FBBECD1A1407EF4E3B" action="add">
+      <property_name>weight_basis</property_name>
+      <sort_order>1024</sort_order>
+      <source_id keyed_name="RootPart" type="qry_QueryItem">659FBDF63A234B47B138E04A0DB43C0B</source_id>
+     </Item>
+     <Item type="qry_QueryItemSelectProperty" id="CD3F8F82D3624A27A156BA14C18D5461" action="add">
+      <property_name>weight_unit</property_name>
+      <sort_order>1152</sort_order>
+      <source_id keyed_name="RootPart" type="qry_QueryItem">659FBDF63A234B47B138E04A0DB43C0B</source_id>
+     </Item>
+     <Item type="qry_QueryItemSelectProperty" id="6B7578FD813041EE81F0107B64D64F53" action="add">
+      <property_name>weight_target</property_name>
+      <sort_order>1280</sort_order>
+      <source_id keyed_name="RootPart" type="qry_QueryItem">659FBDF63A234B47B138E04A0DB43C0B</source_id>
+     </Item>
+     <Item type="qry_QueryItemSelectProperty" id="9E270C5ED1354E64A3C700E23D6271E9" action="add">
+      <property_name>cost_target_basis</property_name>
+      <sort_order>1408</sort_order>
+      <source_id keyed_name="RootPart" type="qry_QueryItem">659FBDF63A234B47B138E04A0DB43C0B</source_id>
+     </Item>
+     <Item type="qry_QueryItemSelectProperty" id="6583DF3F6763435A92A5A0E253BD4280" action="add">
+      <property_name>weight_target_basis</property_name>
+      <sort_order>1536</sort_order>
+      <source_id keyed_name="RootPart" type="qry_QueryItem">659FBDF63A234B47B138E04A0DB43C0B</source_id>
+     </Item>
+    </Relationships>
+   </Item>
+   <Item type="qry_QueryItem" id="D3007156E31F406799BCB694AF51D08E" action="add">
+    <item_type keyed_name="Part BOM" type="ItemType" name="Part BOM">5E9C5A12CC58413A8670CF4003C57848</item_type>
+    <ref_id>3D330E7498F54179AA3E3278C425825A</ref_id>
+    <sort_order>256</sort_order>
+    <source_id keyed_name="Part_CostAndWeightGoalsReport" type="qry_QueryDefinition">F67B2C5D10E0411EBEB665A36EDC9FE0</source_id>
+    <alias>Part BOM</alias>
+    <Relationships>
+     <Item type="qry_QueryItemSelectProperty" id="DD98BB08E7FF4DC4B07386CD18D9E307" action="add">
+      <property_name>quantity</property_name>
+      <sort_order>128</sort_order>
+      <source_id keyed_name="Part BOM" type="qry_QueryItem">D3007156E31F406799BCB694AF51D08E</source_id>
+     </Item>
+     <Item type="qry_QueryItemSelectProperty" id="D48D45A6137144EAB2A83134AAABBE10" action="add">
+      <property_name>sort_order</property_name>
+      <sort_order>256</sort_order>
+      <source_id keyed_name="Part BOM" type="qry_QueryItem">D3007156E31F406799BCB694AF51D08E</source_id>
+     </Item>
+     <Item type="qry_QueryItemSelectProperty" id="FC0E106ED91F416E91CBB48F0D670FC3" action="add">
+      <property_name>cost_per_qty</property_name>
+      <sort_order>384</sort_order>
+      <source_id keyed_name="Part BOM" type="qry_QueryItem">D3007156E31F406799BCB694AF51D08E</source_id>
+     </Item>
+     <Item type="qry_QueryItemSelectProperty" id="8FA9416507C4415F8837A239DC04694D" action="add">
+      <property_name>weight_per_qty</property_name>
+      <sort_order>512</sort_order>
+      <source_id keyed_name="Part BOM" type="qry_QueryItem">D3007156E31F406799BCB694AF51D08E</source_id>
+     </Item>
+     <Item type="qry_QueryItemSelectProperty" id="CDC535AF98BE425F839BEDCDF3B9A09E" action="add">
+      <property_name>related_id</property_name>
+      <sort_order>640</sort_order>
+      <source_id keyed_name="Part BOM" type="qry_QueryItem">D3007156E31F406799BCB694AF51D08E</source_id>
+     </Item>
+    </Relationships>
+   </Item>
+   <Item type="qry_QueryItem" id="85451CC0738944BF9EA5374403F588A7" action="add">
+    <item_type keyed_name="Part" type="ItemType" name="Part">4F1AC04A2B484F3ABA4E20DB63808A88</item_type>
+    <ref_id>75044FAA3CDB46C898044FBB7EB3A694</ref_id>
+    <sort_order>384</sort_order>
+    <source_id keyed_name="Part_CostAndWeightGoalsReport" type="qry_QueryDefinition">F67B2C5D10E0411EBEB665A36EDC9FE0</source_id>
+    <alias>Part</alias>
+    <Relationships>
+     <Item type="qry_QueryItemSelectProperty" id="A210995B2CA3495A87514C1E39AAF571" action="add">
+      <property_name>item_number</property_name>
+      <sort_order>128</sort_order>
+      <source_id keyed_name="Part" type="qry_QueryItem">85451CC0738944BF9EA5374403F588A7</source_id>
+     </Item>
+     <Item type="qry_QueryItemSelectProperty" id="D2053AE3C3064560949B4D9A2DA9A64D" action="add">
+      <property_name>name</property_name>
+      <sort_order>256</sort_order>
+      <source_id keyed_name="Part" type="qry_QueryItem">85451CC0738944BF9EA5374403F588A7</source_id>
+     </Item>
+     <Item type="qry_QueryItemSelectProperty" id="206474A0E2114C20BCA548B7F4EAC2B9" action="add">
+      <property_name>cost</property_name>
+      <sort_order>384</sort_order>
+      <source_id keyed_name="Part" type="qry_QueryItem">85451CC0738944BF9EA5374403F588A7</source_id>
+     </Item>
+     <Item type="qry_QueryItemSelectProperty" id="F4A9B888E3594C38B0C500BE7A5ECDC8" action="add">
+      <property_name>cost_basis</property_name>
+      <sort_order>512</sort_order>
+      <source_id keyed_name="Part" type="qry_QueryItem">85451CC0738944BF9EA5374403F588A7</source_id>
+     </Item>
+     <Item type="qry_QueryItemSelectProperty" id="509670A317174206BAF65611E33B85B5" action="add">
+      <property_name>cost_unit</property_name>
+      <sort_order>640</sort_order>
+      <source_id keyed_name="Part" type="qry_QueryItem">85451CC0738944BF9EA5374403F588A7</source_id>
+     </Item>
+     <Item type="qry_QueryItemSelectProperty" id="EDCBFF5B257F41AD8D7F64DB6C5DE907" action="add">
+      <property_name>cost_target</property_name>
+      <sort_order>768</sort_order>
+      <source_id keyed_name="Part" type="qry_QueryItem">85451CC0738944BF9EA5374403F588A7</source_id>
+     </Item>
+     <Item type="qry_QueryItemSelectProperty" id="62C7AB55E29A4175938CB9463C78D881" action="add">
+      <property_name>weight</property_name>
+      <sort_order>896</sort_order>
+      <source_id keyed_name="Part" type="qry_QueryItem">85451CC0738944BF9EA5374403F588A7</source_id>
+     </Item>
+     <Item type="qry_QueryItemSelectProperty" id="3338E70E17F24939863EA3A813915E2C" action="add">
+      <property_name>weight_basis</property_name>
+      <sort_order>1024</sort_order>
+      <source_id keyed_name="Part" type="qry_QueryItem">85451CC0738944BF9EA5374403F588A7</source_id>
+     </Item>
+     <Item type="qry_QueryItemSelectProperty" id="ACF7493584EE44F7982586409DEA7A40" action="add">
+      <property_name>weight_unit</property_name>
+      <sort_order>1152</sort_order>
+      <source_id keyed_name="Part" type="qry_QueryItem">85451CC0738944BF9EA5374403F588A7</source_id>
+     </Item>
+     <Item type="qry_QueryItemSelectProperty" id="FB90235B8FB14E7FA0F6936D6FA529D4" action="add">
+      <property_name>weight_target</property_name>
+      <sort_order>1280</sort_order>
+      <source_id keyed_name="Part" type="qry_QueryItem">85451CC0738944BF9EA5374403F588A7</source_id>
+     </Item>
+     <Item type="qry_QueryItemSelectProperty" id="9C2DD4B59586437BA14D7D5771D68BB9" action="add">
+      <property_name>cost_target_basis</property_name>
+      <sort_order>1408</sort_order>
+      <source_id keyed_name="Part" type="qry_QueryItem">85451CC0738944BF9EA5374403F588A7</source_id>
+     </Item>
+     <Item type="qry_QueryItemSelectProperty" id="B7BFCD9435FF4AA0870DCF2406855E79" action="add">
+      <property_name>weight_target_basis</property_name>
+      <sort_order>1536</sort_order>
+      <source_id keyed_name="Part" type="qry_QueryItem">85451CC0738944BF9EA5374403F588A7</source_id>
+     </Item>
+    </Relationships>
+   </Item>
+   <Item type="qry_QueryReference" id="EE127C4CC3CE428D9A6B4FA6D147EB6C" action="add">
+    <child_ref_id>443820D6457E42D2BD2A83A374E7EAFB</child_ref_id>
+    <sort_order>128</sort_order>
+    <source_id keyed_name="Part_CostAndWeightGoalsReport" type="qry_QueryDefinition">F67B2C5D10E0411EBEB665A36EDC9FE0</source_id>
+   </Item>
+   <Item type="qry_QueryReference" id="436BBCDACE97452C8310978F750476DF" action="add">
+    <child_ref_id>3D330E7498F54179AA3E3278C425825A</child_ref_id>
+    <filter_xml><![CDATA[<condition>
+	<eq>
+		<property query_items_xpath="parent::Item" name="id" />
+		<property name="source_id" />
+	</eq>
+</condition>]]></filter_xml>
+    <parent_ref_id>443820D6457E42D2BD2A83A374E7EAFB</parent_ref_id>
+    <ref_id>765F5E89643344FF8F92A8EA9001E18D</ref_id>
+    <sort_order>256</sort_order>
+    <source_id keyed_name="Part_CostAndWeightGoalsReport" type="qry_QueryDefinition">F67B2C5D10E0411EBEB665A36EDC9FE0</source_id>
+   </Item>
+   <Item type="qry_QueryReference" id="B7CDFAD236104262A9957DDBDA14CE7D" action="add">
+    <child_ref_id>75044FAA3CDB46C898044FBB7EB3A694</child_ref_id>
+    <filter_xml><![CDATA[<condition>
+	<eq>
+		<property query_items_xpath="parent::Item" name="related_id" />
+		<property name="id" />
+	</eq>
+</condition>]]></filter_xml>
+    <parent_ref_id>3D330E7498F54179AA3E3278C425825A</parent_ref_id>
+    <ref_id>B039500ACF694DE8A3BCAC6011FA87CE</ref_id>
+    <sort_order>384</sort_order>
+    <source_id keyed_name="Part_CostAndWeightGoalsReport" type="qry_QueryDefinition">F67B2C5D10E0411EBEB665A36EDC9FE0</source_id>
+   </Item>
+   <Item type="qry_QueryReference" id="5E80A7ECB5374664998A2BDF6EF7D498" action="add">
+    <child_ref_id>3D330E7498F54179AA3E3278C425825A</child_ref_id>
+    <filter_xml><![CDATA[<condition>
+	<eq>
+		<property query_items_xpath="parent::Item" name="id" />
+		<property name="source_id" />
+	</eq>
+</condition>]]></filter_xml>
+    <parent_ref_id>75044FAA3CDB46C898044FBB7EB3A694</parent_ref_id>
+    <ref_id>C0C0D6E8A4D84F6D8CADC858D293BEAB</ref_id>
+    <sort_order>512</sort_order>
+    <source_id keyed_name="Part_CostAndWeightGoalsReport" type="qry_QueryDefinition">F67B2C5D10E0411EBEB665A36EDC9FE0</source_id>
+   </Item>
+  </Relationships>
+ </Item>
+</AML>

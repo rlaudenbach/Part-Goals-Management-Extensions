@@ -1,0 +1,95 @@
+﻿<AML>
+ <Item type="Form" id="E08B3F44B2784C0FB34675D6FD5B3C86" action="add">
+  <category_form>0</category_form>
+  <height>234</height>
+  <stylesheet><![CDATA[../styles/default.css]]></stylesheet>
+  <width>699</width>
+  <name>ruc_TypeManualValues</name>
+  <Relationships>
+   <Item type="Body" id="A6215FA36D704AF499037C3DD1F466C5" action="add">
+    <bg_color>#FFFFFF</bg_color>
+    <sort_order>128</sort_order>
+    <source_id keyed_name="ruc_TypeManualValues" type="Form">E08B3F44B2784C0FB34675D6FD5B3C86</source_id>
+    <Relationships>
+     <Item type="Field" id="296A75E672B74C419549008813D661A9" action="add">
+      <border_width>0</border_width>
+      <display_length>150</display_length>
+      <display_length_unit>px</display_length_unit>
+      <field_type>ml_string</field_type>
+      <font_color>#000000</font_color>
+      <font_family>arial, helvetica, sans-serif</font_family>
+      <font_size>8pt</font_size>
+      <font_weight>bold</font_weight>
+      <is_disabled>0</is_disabled>
+      <is_visible>1</is_visible>
+      <label xml:lang="en">Manual Rollup Basis Label Property (on Rollup Rel)</label>
+      <label_position>top</label_position>
+      <list_no_blank>0</list_no_blank>
+      <propertytype_id keyed_name="rollup_manual_basis_label" type="Property">3CDDB4013D004D3AA671D34BC1F52325</propertytype_id>
+      <sort_order>384</sort_order>
+      <source_id keyed_name="A6215FA36D704AF499037C3DD1F466C5" type="Body">A6215FA36D704AF499037C3DD1F466C5</source_id>
+      <tab_index>20</tab_index>
+      <tab_stop>1</tab_stop>
+      <x>115</x>
+      <y>50</y>
+      <name>rollup_manual_basis_label</name>
+     </Item>
+     <Item type="Field" id="568CE73552874D4F878744EA544E7F10" action="add">
+      <border_width>0</border_width>
+      <display_length>150</display_length>
+      <display_length_unit>px</display_length_unit>
+      <field_type>text</field_type>
+      <font_color>#000000</font_color>
+      <font_family>arial, helvetica, sans-serif</font_family>
+      <font_size>8pt</font_size>
+      <font_weight>bold</font_weight>
+      <is_disabled>0</is_disabled>
+      <is_visible>1</is_visible>
+      <label xml:lang="en">Manual Rollup Value Property  (on Rollup Rel)</label>
+      <label_position>top</label_position>
+      <list_no_blank>0</list_no_blank>
+      <propertytype_id keyed_name="rollup_manual_value_prop" type="Property">F3F0E59BA26B46BF8B7DF168FADD7371</propertytype_id>
+      <sort_order>256</sort_order>
+      <source_id keyed_name="A6215FA36D704AF499037C3DD1F466C5" type="Body">A6215FA36D704AF499037C3DD1F466C5</source_id>
+      <tab_index>10</tab_index>
+      <tab_stop>1</tab_stop>
+      <x>115</x>
+      <y>10</y>
+      <name>rollup_manual_value_prop</name>
+     </Item>
+     <Item type="Field" id="C55D01DFA34E4F5889755F798F18E1B4" action="add">
+      <border_width>0</border_width>
+      <display_length>44</display_length>
+      <display_length_unit>px</display_length_unit>
+      <field_type>text</field_type>
+      <font_color>#000000</font_color>
+      <font_family>arial, helvetica, sans-serif</font_family>
+      <font_size>8pt</font_size>
+      <font_weight>bold</font_weight>
+      <is_disabled>0</is_disabled>
+      <is_visible>1</is_visible>
+      <label xml:lang="en">Precedence</label>
+      <label_position>top</label_position>
+      <list_no_blank>0</list_no_blank>
+      <sort_order>128</sort_order>
+      <source_id keyed_name="A6215FA36D704AF499037C3DD1F466C5" type="Body">A6215FA36D704AF499037C3DD1F466C5</source_id>
+      <tab_index>8</tab_index>
+      <tab_stop>1</tab_stop>
+      <x>10</x>
+      <y>10</y>
+      <name>sort_order</name>
+     </Item>
+    </Relationships>
+   </Item>
+  </Relationships>
+ </Item>
+ <Item type="Field" id="C55D01DFA34E4F5889755F798F18E1B4" action="edit">
+  <!-- Please note: this AML depends on the "ruc_TypeManualValues" ItemType. Please make sure it exists before running this. -->
+  <propertytype_id>
+   <Item type="Property" action="get" select="id">
+    <name>sort_order</name>
+    <source_id type="ItemType" keyed_name="ruc_TypeManualValues">29EF9ED481C045229459FE1053DCF4BA</source_id>
+   </Item>
+  </propertytype_id>
+ </Item>
+</AML>

@@ -1,0 +1,76 @@
+﻿<AML>
+ <Item type="Method" id="830BD0ED65EE4BD48F21E7418E6A4988" action="add">
+  <comments>use "Run Server Method" as administrator</comments>
+  <execution_allowed_to keyed_name="Administrators" type="Identity">2618D6F5A90949BAA7E920D1B04C7EE1</execution_allowed_to>
+  <method_code><![CDATA[// requires Part Goal extension to hold "goal_unit" property. and Part extension to hold "cost_unit" property
+
+//System.Diagnostics.Debugger.Launch();System.Diagnostics.Debugger.Break();
+
+Innovator inn = this.getInnovator();
+
+// 1. read Rollup Configuration
+Item callMethod = this.newItem("Method", "ruc_GetRollupDefintion");
+callMethod.setAttribute("rollupStructRelshipType","Part BOM");
+
+Item rollupDefinition = callMethod.apply();
+if (rollupDefinition.getItemCount() != 1) {
+    return this.getInnovator().newError("Error reading rollup configuration: Missing or multiple configurations for rollup structure '"+callMethod.getAttribute("rollupStructRelshipType","-")+"'");
+}
+string rollupServiceMethod = rollupDefinition.getProperty("rollup_service_method","");
+
+// 2. run roll up logic on all leaf level parts
+string SQL = String.Format("SELECT {0}.id FROM {0} WHERE {0}.id not in (SELECT {1}.source_id FROM {1})", "[Part]", "[Part_BOM]");
+Item res = inn.applySQL(SQL);
+string partIds = "";
+for (int i=0; i<res.getItemCount(); i++) {
+    if (i==0) {partIds += res.getItemByIndex(i).getProperty("id");}
+    else {   partIds += "," + res.getItemByIndex(i).getProperty("id");}
+}
+
+//##  for debugging  partIds = "CF727F76BC594F35BF32F4D0B0CBBCB1,7AFF71A929DF4F2EAB9A3FC2A8A0AF11";
+
+if (partIds != "") {
+    string aml = "<Item type='Part' action= 'get' select='id,cost_unit,cost,weight_unit,weight' >";
+    aml += "<id condition='in'>'"+partIds.Replace(",","','")+"'</id>";
+    aml += "<Relationships>";
+    aml += "<Item type='Part Goal' action= 'get' select='*' >";
+    aml += "</Item>";
+    aml += "</Relationships>";
+    aml += "</Item>";
+    res.loadAML(aml);
+    res = res.apply();
+    
+    Item allPartGoalsOnLeafLevel = res.getItemsByXPath("//Item[@type='Part Goal']");
+    Item debugItem = null;    
+    for (int i=0; i<allPartGoalsOnLeafLevel.getItemCount(); i++) {
+        Item itm = allPartGoalsOnLeafLevel.getItemByIndex(i);
+        string rollupType = itm.getProperty("goal","");
+        
+        Item parentPart = itm.getPropertyItem("source_id");
+        if (i == 0) {debugItem = parentPart;}
+        
+        // --- run generic rollup service method ---
+        // rollupType                 *required
+        // rollupStartNodeId          *required
+        // rollupStartNodeItemType    *required
+        // resolutionDirection        *required     --> can be up or down(=default)
+        // applyResolutionFilter       optional     --> as defined in rollup configuration
+        // rollupNodeCallbackMethods   optional     --> comma separated list of method names (overrides configured methods)
+        
+        rollupDefinition.setAttribute("debugNodeId", debugItem.getID());
+        rollupDefinition.setAttribute("rollupType", rollupType);
+        rollupDefinition.setAttribute("rollupStartNodeId", parentPart.getID());
+        rollupDefinition.setAttribute("rollupStartNodeItemType", parentPart.getType());
+        rollupDefinition.setAttribute("resolutionDirection", "up");
+        rollupDefinition.setAttribute("applyResolutionFilter", "1");
+        rollupDefinition.setAttribute("skipFilterOnImmediateNextLevel", "1");
+        res = rollupDefinition.apply(rollupServiceMethod);
+    }
+}
+
+return this;
+]]></method_code>
+  <method_type>C#</method_type>
+  <name>Adm PartGoals Update Calculation</name>
+ </Item>
+</AML>

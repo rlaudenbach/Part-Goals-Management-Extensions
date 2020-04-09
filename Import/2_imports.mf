@@ -1,0 +1,6 @@
+<imports>
+  <package name="Part Goals Management Extensions" path="Part Goals Management Extensions\Import">
+    <dependson name="com.aras.innovator.solution.PLM" />
+    <dependson name="Rollup Calculation Utilities" />
+  </package>
+</imports>

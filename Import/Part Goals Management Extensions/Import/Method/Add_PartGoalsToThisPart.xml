@@ -1,0 +1,123 @@
+﻿<AML>
+ <Item type="Method" id="849849CEA49A410CAC9FA7BDB8AAA00F" action="add">
+  <execution_allowed_to keyed_name="World" type="Identity">A73B655731924CD0B027E4F4D5FCC0A9</execution_allowed_to>
+  <method_code><![CDATA[// context Item:  Part BOM
+// calling Event: onAfterAdd, onAfterDelete
+
+//System.Diagnostics.Debugger.Launch();System.Diagnostics.Debugger.Break();
+
+string thisAction = this.getAttribute("action","");
+
+// 3. Read rollup Configuration
+string rollupConfigurationKey = "Part BOM";
+
+Item callMethod = this.newItem("Method", "ruc_GetRollupDefintion");
+callMethod.setAttribute("rollupStructRelshipType",rollupConfigurationKey);
+
+Item rollupDefinition = callMethod.apply();
+if (rollupDefinition.getItemCount() != 1) {
+    return this.getInnovator().newError("Error reading rollup configuration: Missing or multiple configurations for rollup structure '"+callMethod.getAttribute("rollupStructRelshipType","-")+"'");
+}
+string rollupServiceMethod = rollupDefinition.getProperty("rollup_service_method","");
+
+Item parentPart;
+Item parentPartGoals;
+Item res;
+
+if (thisAction != "delete") {
+    // 2. get Part Goal from parent part
+    string aml = "<Item type='Part BOM' action= 'get' id='"+this.getID()+"' >";
+    aml += "<source_id>";
+    aml += "<Item type='Part' action= 'get' select='*' >";
+    aml += "<Relationships>";
+    aml += "<Item type='Part Goal' action= 'get' select='*' >";
+    aml += "</Item>";
+    aml += "</Relationships>";
+    aml += "</Item>";
+    aml += "</source_id>";
+    aml += "<related_id>";
+    aml += "<Item type='Part' action= 'get' select='*' >";
+    aml += "</Item>";
+    aml += "</related_id>";
+    aml += "</Item>";
+    Item partBOM = this.newItem("");
+    partBOM.loadAML(aml);
+    partBOM = partBOM.apply();
+    
+    // 4. for each item type in parent goals run "add" common rollup relship method on child part
+    string partGoalType = "";
+    parentPartGoals = partBOM.getItemsByXPath("//Item[@type='Part Goal']");
+    parentPart = partBOM.getPropertyItem("source_id");
+    for (int i=0; i<parentPartGoals.getItemCount(); i++) {
+        Item parentPartGoal = parentPartGoals.getItemByIndex(i);
+        partGoalType = parentPartGoal.getProperty("goal","");
+    
+        rollupDefinition.setAttribute("rollupType", partGoalType);
+        rollupDefinition.setAttribute("dataModelAction", "add");
+        rollupDefinition.setAttribute("rollupStructRelshipType", rollupConfigurationKey);
+        
+        Item childPart = partBOM.getRelatedItem();
+        rollupDefinition.setAttribute("rollupStartNodeId", childPart.getID());
+        rollupDefinition.setAttribute("rollupStartNodeItemType", childPart.getType());
+        res = rollupDefinition.apply("ruc_ManageRollupRelOnAllChildren");
+        if (res.isError()) {return res;}
+    
+        // if child part has cost or weight values, do rollupCalculations
+        if (partGoalType == "Cost" && childPart.getProperty("cost","") != "" || partGoalType == "Weight" && childPart.getProperty("weight","") != "") {
+            
+            // --- run generic rollup service method ---
+            // rollupType                       *required
+            // rollupStartNodeId                *required
+            // rollupStartNodeItemType          *required
+            // resolutionDirection              *required     --> can be up or down(=default)
+            // levelProcessingDirection         optional      --> can be up or down.  default = resolutionDirection
+            // processLeafLevelOnly             optional      --> can be "1" or "0"(=default) - use, if resolutionDirection = down
+            // applyResolutionFilter            optional      --> can be "1" or "0". filter is defined in rollup configuration
+            // skipFilterOnImmediateNextLevel   optional      --> skips filter on next level to ensure its next parents or next children are always processed
+            // rollupNodeCallbackMethods        optional      --> comma separated list of method names (overrides configured methods)
+            
+            rollupDefinition.setAttribute("rollupStartNodeId", parentPart.getID());
+            rollupDefinition.setAttribute("rollupStartNodeItemType", parentPart.getType());
+            rollupDefinition.setAttribute("resolutionDirection", "up");
+            rollupDefinition.setAttribute("applyResolutionFilter", "1");
+            rollupDefinition.setAttribute("skipFilterOnImmediateNextLevel", "1");
+            
+            res = rollupDefinition.apply(rollupServiceMethod);
+            if (res.isError()) {return res;}
+        }
+    }
+}
+else {
+    parentPart = this.getInnovator().getItemById("Part", this.getProperty("source_id","invalid"));
+
+    parentPart.fetchRelationships(rollupDefinition.getProperty("rollup_struct_relship_type",""));
+    parentPartGoals = parentPart.getRelationships(rollupDefinition.getProperty("rollup_struct_relship_type",""));
+    if (parentPartGoals.getItemCount() <= 0) {
+        rollupDefinition.setAttribute("rollupType", "*");
+        rollupDefinition.setAttribute("dataModelAction", "resetNodeValues");
+        rollupDefinition.setAttribute("rollupStartNodeId", parentPart.getID());
+        rollupDefinition.setAttribute("rollupStartNodeItemType", parentPart.getType());
+        
+        res = rollupDefinition.apply("ruc_ManageRollupRelOnAllChildren");
+        if (res.isError()) {return res;}
+    }
+    else {
+        rollupDefinition.setAttribute("rollupType", "*");
+        rollupDefinition.setAttribute("rollupStartNodeId", parentPart.getID());
+        rollupDefinition.setAttribute("rollupStartNodeItemType", parentPart.getType());
+        rollupDefinition.setAttribute("rollupStructRelshipType", rollupConfigurationKey);
+        rollupDefinition.setAttribute("resolutionDirection", "up");
+        rollupDefinition.setAttribute("applyResolutionFilter", "1");
+        rollupDefinition.setAttribute("skipFilterOnImmediateNextLevel", "1");
+        
+        res = rollupDefinition.apply(rollupServiceMethod);
+        if (res.isError()) {return res;}
+    }
+}
+
+return this;
+]]></method_code>
+  <method_type>C#</method_type>
+  <name>AddOrDel_BOMpartWithPartGoals</name>
+ </Item>
+</AML>

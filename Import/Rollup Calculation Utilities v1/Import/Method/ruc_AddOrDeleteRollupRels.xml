@@ -1,0 +1,90 @@
+﻿<AML>
+ <Item type="Method" id="C3BABBFB99234A61BAEFD7F7D049B46A" action="add">
+  <comments>generic client method - starts dialog to select rollup type</comments>
+  <execution_allowed_to keyed_name="World" type="Identity">A73B655731924CD0B027E4F4D5FCC0A9</execution_allowed_to>
+  <method_code><![CDATA[//Get params
+var itemTypeName = inArgs.itemTypeName;
+var itemId = inArgs.itemId;
+var rollupDataModelAction = inArgs.dataModelAction;
+var rollupStructRelshipType = inArgs.rollupStructRelshipType;
+
+//Get item from cache or from server
+var itmNd = aras.getItemById(itemTypeName, itemId, 0);
+var thisItem = aras.newIOMItem("");
+thisItem.loadAML(itmNd.xml);
+
+// check if action can be run
+var islocked = thisItem.getLockStatus();
+if (islocked > 0) {
+    aras.AlertError("Item cannot be locked/claimed to run this action !");  //##TODO## add I18N support
+    return;
+}
+
+// Read rollup configuration
+var callMethod = aras.newIOMItem("Method", "ruc_GetRollupDefintion");
+callMethod.setAttribute("rollupStructRelshipType",rollupStructRelshipType);
+var rollupDefinition = callMethod.apply();
+if (rollupDefinition.getItemCount() != 1) {
+    aras.AlertError("Error reading rollup configuration: Missing or multiple configurations for rollup structure '"+callMethod.getAttribute("rollupStructRelshipType","-")+"'"); //##TODO## add I18N support
+    return;
+}
+
+var rollupTypesListId = rollupDefinition.getProperty("rollup_types_list",""); 
+
+// open dialog to select the Rollup Type
+var formNd = aras.getItemByName("Form", "ruc_SelectRollupTypesFromConfig", 0);
+
+if (formNd)
+{
+  var param = {};
+  param.title = "Select Rollup Scenario"; //##TODO## add I18N support
+  param.formId = formNd.getAttribute("id");
+  param.aras = top.aras;
+  param.itemTypeName = this.getType();
+  param.item = rollupDefinition;
+  param.isEditMode = true;
+
+  var width = top.aras.getItemProperty(formNd, "width");
+  var height = top.aras.getItemProperty(formNd, "height");
+
+  var options = {
+      dialogWidth: width,
+      dialogHeight: height
+    };
+	var callback = {
+		oncancel: function (dialogWrapper) {
+			var result = dialogWrapper.result;
+			if(!result)	{return;}
+			
+            //call server method to process this action - adding empty Part Goals (top down)
+            rollupDefinition.setAttribute("rollupType", result);
+            rollupDefinition.setAttribute("dataModelAction", rollupDataModelAction);
+            rollupDefinition.setAttribute("rollupStartNodeId", itemId);
+            rollupDefinition.setAttribute("rollupStartNodeItemType", itemTypeName);
+            rollupDefinition.setAttribute("rollupStructRelshipType", rollupStructRelshipType);
+            var res = rollupDefinition.apply("ruc_ManageRollupRelOnAllChildren");
+            if (res.isError()) {
+                aras.AlertError(res.getErrorString());
+                return res.getErrorString();
+            }
+            if (rollupDataModelAction === "delete") {
+                aras.AlertSuccess("Part Goals got deleted. Click Refresh"); //##TODO## add I18N support
+            }
+            else {
+                aras.AlertSuccess("Part Goals got added. Click Refresh"); //##TODO## add I18N support
+            }
+		}
+	  };
+	var wnd = top.aras.getMainWindow();
+	wnd = wnd === top ? wnd.main : top;
+    top.aras.modalDialogHelper.show('DefaultPopup', wnd, param, options, 'ShowFormAsADialog.html', callback);
+}
+
+return;
+
+
+]]></method_code>
+  <method_type>JavaScript</method_type>
+  <name>ruc_AddOrDeleteRollupRels</name>
+ </Item>
+</AML>

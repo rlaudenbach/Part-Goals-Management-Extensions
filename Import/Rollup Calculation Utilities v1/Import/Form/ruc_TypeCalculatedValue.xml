@@ -1,0 +1,178 @@
+﻿<AML>
+ <Item type="Form" id="AF0C6048DD134C5BA65D401D7AEFFB4A" action="add">
+  <category_form>0</category_form>
+  <height>234</height>
+  <stylesheet><![CDATA[../styles/default.css]]></stylesheet>
+  <width>699</width>
+  <name>ruc_TypeCalculatedValue</name>
+  <Relationships>
+   <Item type="Body" id="5D306018250141F6A2E5A11EDCC73A63" action="add">
+    <bg_color>#FFFFFF</bg_color>
+    <sort_order>128</sort_order>
+    <source_id keyed_name="ruc_TypeCalculatedValue" type="Form">AF0C6048DD134C5BA65D401D7AEFFB4A</source_id>
+    <Relationships>
+     <Item type="Field" id="0E1261219C7A46A7BEA61587B27C0D8C" action="add">
+      <border_width>0</border_width>
+      <display_length>120</display_length>
+      <display_length_unit>px</display_length_unit>
+      <field_type>text</field_type>
+      <font_color>#000000</font_color>
+      <font_family>arial, helvetica, sans-serif</font_family>
+      <font_size>8pt</font_size>
+      <font_weight>bold</font_weight>
+      <is_disabled>0</is_disabled>
+      <is_visible>1</is_visible>
+      <label xml:lang="en">Rollup Basis Property (on RollupRel)</label>
+      <label_position>top</label_position>
+      <list_no_blank>0</list_no_blank>
+      <propertytype_id keyed_name="rollup_basis_prop" type="Property">6370675F9BAE4A85B16BABC0F2DB1849</propertytype_id>
+      <sort_order>640</sort_order>
+      <source_id keyed_name="5D306018250141F6A2E5A11EDCC73A63" type="Body">5D306018250141F6A2E5A11EDCC73A63</source_id>
+      <tab_index>110</tab_index>
+      <tab_stop>1</tab_stop>
+      <x>465</x>
+      <y>55</y>
+      <name>rollup_basis_prop</name>
+     </Item>
+     <Item type="Field" id="9B2768A0DD6049D3890F863F231A5429" action="add">
+      <border_width>0</border_width>
+      <display_length>120</display_length>
+      <display_length_unit>px</display_length_unit>
+      <field_type>ml_string</field_type>
+      <font_color>#000000</font_color>
+      <font_family>arial, helvetica, sans-serif</font_family>
+      <font_size>8pt</font_size>
+      <font_weight>bold</font_weight>
+      <is_disabled>0</is_disabled>
+      <is_visible>1</is_visible>
+      <label xml:lang="en">Rollup Calculated Basis Label</label>
+      <label_position>top</label_position>
+      <list_no_blank>0</list_no_blank>
+      <propertytype_id keyed_name="rollup_calculated_basis_label" type="Property">05046AF0EA14445E9CDDEB5629AAEDDD</propertytype_id>
+      <sort_order>256</sort_order>
+      <source_id keyed_name="5D306018250141F6A2E5A11EDCC73A63" type="Body">5D306018250141F6A2E5A11EDCC73A63</source_id>
+      <tab_index>150</tab_index>
+      <tab_stop>1</tab_stop>
+      <x>250</x>
+      <y>55</y>
+      <name>rollup_calculated_basis_label</name>
+     </Item>
+     <Item type="Field" id="9C8076099C2845B18F4454541275FA72" action="add">
+      <border_width>0</border_width>
+      <display_length>120</display_length>
+      <display_length_unit>px</display_length_unit>
+      <field_type>text</field_type>
+      <font_color>#000000</font_color>
+      <font_family>arial, helvetica, sans-serif</font_family>
+      <font_size>8pt</font_size>
+      <font_weight>bold</font_weight>
+      <is_disabled>0</is_disabled>
+      <is_visible>1</is_visible>
+      <label xml:lang="en">Rollup Calculated Value Property (on RollupRel)</label>
+      <label_position>top</label_position>
+      <list_no_blank>0</list_no_blank>
+      <propertytype_id keyed_name="rollup_calculated_value_prop" type="Property">6CC8A9EA7BFE4318A65F1CA926D901CD</propertytype_id>
+      <sort_order>128</sort_order>
+      <source_id keyed_name="5D306018250141F6A2E5A11EDCC73A63" type="Body">5D306018250141F6A2E5A11EDCC73A63</source_id>
+      <tab_index>140</tab_index>
+      <tab_stop>1</tab_stop>
+      <x>465</x>
+      <y>15</y>
+      <name>rollup_calculated_value_prop</name>
+     </Item>
+     <Item type="Field" id="8DEAC89EBF684CE3A7644AEFF0902E97" action="add">
+      <bg_color>beige  </bg_color>
+      <border_width>0</border_width>
+      <display_length>200</display_length>
+      <display_length_unit>px</display_length_unit>
+      <field_type>text</field_type>
+      <font_color>#000000</font_color>
+      <font_family>arial, helvetica, sans-serif</font_family>
+      <font_size>8pt</font_size>
+      <font_weight>bold</font_weight>
+      <is_disabled>0</is_disabled>
+      <is_visible>1</is_visible>
+      <label xml:lang="en">Calculation Name</label>
+      <label_position>top</label_position>
+      <list_no_blank>0</list_no_blank>
+      <propertytype_id keyed_name="rollup_calculation_name" type="Property">9C529B16B63F4E7FB1B745903447FE45</propertytype_id>
+      <sort_order>512</sort_order>
+      <source_id keyed_name="5D306018250141F6A2E5A11EDCC73A63" type="Body">5D306018250141F6A2E5A11EDCC73A63</source_id>
+      <tab_index>10</tab_index>
+      <tab_stop>1</tab_stop>
+      <x>20</x>
+      <y>15</y>
+      <name>rollup_calculation_name</name>
+     </Item>
+     <Item type="Field" id="283AE97883744107BA05522DCD3ED396" action="add">
+      <border_width>0</border_width>
+      <display_length_unit>px</display_length_unit>
+      <field_type>text</field_type>
+      <font_color>#000000</font_color>
+      <font_family>arial, helvetica, sans-serif</font_family>
+      <font_size>8pt</font_size>
+      <font_weight>bold</font_weight>
+      <is_disabled>0</is_disabled>
+      <is_visible>1</is_visible>
+      <label xml:lang="en">Quantity Property Name (on Struct)</label>
+      <label_position>top</label_position>
+      <list_no_blank>0</list_no_blank>
+      <propertytype_id keyed_name="rollup_quantity_prop" type="Property">F54AC35DD4594CFB8551AD21B07BFCC2</propertytype_id>
+      <sort_order>768</sort_order>
+      <source_id keyed_name="5D306018250141F6A2E5A11EDCC73A63" type="Body">5D306018250141F6A2E5A11EDCC73A63</source_id>
+      <tab_index>160</tab_index>
+      <tab_stop>1</tab_stop>
+      <x>755</x>
+      <y>15</y>
+      <name>rollup_quantity_prop</name>
+     </Item>
+     <Item type="Field" id="B329660173DE4451BDE1030D15B02761" action="add">
+      <border_width>0</border_width>
+      <display_length>150</display_length>
+      <display_length_unit>px</display_length_unit>
+      <field_type>text</field_type>
+      <font_color>#000000</font_color>
+      <font_family>arial, helvetica, sans-serif</font_family>
+      <font_size>8pt</font_size>
+      <font_weight>bold</font_weight>
+      <is_disabled>0</is_disabled>
+      <is_visible>1</is_visible>
+      <label xml:lang="en">Rollup Single Node Calculation Method</label>
+      <label_position>top</label_position>
+      <list_no_blank>0</list_no_blank>
+      <propertytype_id keyed_name="rollup_single_node_method" type="Property">3F070A369F484824802857DCE0EC7502</propertytype_id>
+      <sort_order>384</sort_order>
+      <source_id keyed_name="5D306018250141F6A2E5A11EDCC73A63" type="Body">5D306018250141F6A2E5A11EDCC73A63</source_id>
+      <tab_index>200</tab_index>
+      <tab_stop>1</tab_stop>
+      <x>20</x>
+      <y>55</y>
+      <name>rollup_single_node_method</name>
+     </Item>
+     <Item type="Field" id="B90B46D74AEF437DBE4E3082F841C220" action="add">
+      <border_width>0</border_width>
+      <display_length_unit>px</display_length_unit>
+      <field_type>text</field_type>
+      <font_color>#000000</font_color>
+      <font_family>arial, helvetica, sans-serif</font_family>
+      <font_size>8pt</font_size>
+      <font_weight>bold</font_weight>
+      <is_disabled>0</is_disabled>
+      <is_visible>1</is_visible>
+      <label xml:lang="en">Rollup Value Property (on Node)</label>
+      <label_position>top</label_position>
+      <list_no_blank>0</list_no_blank>
+      <propertytype_id keyed_name="rollup_value_prop" type="Property">52227BDAA616424D961431DB2D450E44</propertytype_id>
+      <sort_order>896</sort_order>
+      <source_id keyed_name="5D306018250141F6A2E5A11EDCC73A63" type="Body">5D306018250141F6A2E5A11EDCC73A63</source_id>
+      <tab_index>105</tab_index>
+      <tab_stop>1</tab_stop>
+      <x>250</x>
+      <y>15</y>
+      <name>rollup_value_prop</name>
+     </Item>
+    </Relationships>
+   </Item>
+  </Relationships>
+ </Item>
+</AML>

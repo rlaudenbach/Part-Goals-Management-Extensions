@@ -1,0 +1,172 @@
+<!--
+<AML>
+<Item action='get' type='ruc_Definition' select='rollup_node_item_type,rollup_struct_relship_type,rollup_values_relship_type,rollup_service_method,rollup_types_list,rollup_type_prop,rollup_relship_unit_prop,description' >
+<Relationships>
+<Item action='get' type='ruc_TypeDefinition' select='sort_order,rollup_type,rollup_basis_prop,rollup_unit_prop,rollup_unit,rollup_node_filter_condition,rollup_struct_filter_condition' >
+<Relationships>
+<Item action='get' type='ruc_TypeCalculatedValue' select='sort_order,rollup_calculation_name,rollup_value_prop,rollup_calculated_basis_label,rollup_calculated_value_prop,rollup_basis_prop,rollup_quantity_prop,rollup_single_node_method'>
+<Relationships>
+<Item action='get' type='ruc_TypeManualValues' select='sort_order,rollup_manual_basis_label,rollup_manual_value_prop,rollup_related_calculated_prop'>
+</Item>
+</Relationships>
+</Item>
+</Relationships>
+</Item>
+</Relationships>
+</Item>
+</AML>
+
+-->
+
+<AML>
+      <Item action="merge" type="ruc_Definition" typeId="4951A0E012E44CE09EE236D54CA8DCA2" id="FC5B972870B34F90AE59BA7E6048E73C">
+        <description>Part Goals rollup scenarios (cost and weight ). Actuals and Target rollup</description>
+        <id keyed_name="Part Part BOM" type="ruc_Definition">FC5B972870B34F90AE59BA7E6048E73C</id>
+        <rollup_relship_unit_prop>goal_unit</rollup_relship_unit_prop>
+        <rollup_service_method>ruc_StructResolutionRunCallbacks</rollup_service_method>
+        <rollup_type_prop>goal</rollup_type_prop>
+        <rollup_types_list keyed_name="Part Goals" type="List">4AD527908C984F80AFD6F149F78A1711</rollup_types_list>
+        <rollup_values_relship_type>Part Goal</rollup_values_relship_type>
+        <rollup_node_item_type>Part</rollup_node_item_type>
+        <rollup_struct_relship_type>Part BOM</rollup_struct_relship_type>
+        <Relationships>
+          <Item action="merge" type="ruc_TypeDefinition" typeId="350297ED78034B8CA63E9D3CE30253ED" id="6B5C9A1FD65C49958DAA48308A1C26CD">
+            <id keyed_name="6B5C9A1FD65C49958DAA48308A1C26CD" type="ruc_TypeDefinition">6B5C9A1FD65C49958DAA48308A1C26CD</id>
+            <rollup_node_filter_condition>&lt;OR&gt;
+&lt;cost_basis&gt;Calculated&lt;/cost_basis&gt;
+&lt;cost_basis condition='is null' /&gt;
+&lt;/OR&gt;
+
+</rollup_node_filter_condition>
+            <rollup_struct_filter_condition is_null="1" />
+            <rollup_type>Cost</rollup_type>
+            <rollup_unit>USD</rollup_unit>
+            <rollup_unit_prop>cost_unit</rollup_unit_prop>
+            <sort_order>128</sort_order>
+            <source_id keyed_name="Part Part BOM" type="ruc_Definition">FC5B972870B34F90AE59BA7E6048E73C</source_id>
+            <Relationships>
+              <Item action="merge" type="ruc_TypeCalculatedValue" typeId="BF56EB93EBF14580A859D170D790D2F2" id="DFD75EEDAE19474AA02104D1F20791FD">
+                <id keyed_name="DFD75EEDAE19474AA02104D1F20791FD" type="ruc_TypeCalculatedValue">DFD75EEDAE19474AA02104D1F20791FD</id>
+                <rollup_basis_prop>cost_basis</rollup_basis_prop>
+                <rollup_calculated_basis_label xml:lang="en">Calculated</rollup_calculated_basis_label>
+                <rollup_calculated_value_prop>calculated_value</rollup_calculated_value_prop>
+                <rollup_calculation_name>Actual cost values rollup</rollup_calculation_name>
+                <rollup_quantity_prop>quantity</rollup_quantity_prop>
+                <rollup_single_node_method>RollupSinglePartGoals</rollup_single_node_method>
+                <rollup_value_prop>cost</rollup_value_prop>
+                <sort_order>128</sort_order>
+                <source_id keyed_name="6B5C9A1FD65C49958DAA48308A1C26CD" type="ruc_TypeDefinition">6B5C9A1FD65C49958DAA48308A1C26CD</source_id>
+                <Relationships>
+                  <Item action="merge" type="ruc_TypeManualValues" typeId="29EF9ED481C045229459FE1053DCF4BA" id="08F73FD11868432DA73A9115342AA261">
+                    <id keyed_name="08F73FD11868432DA73A9115342AA261" type="ruc_TypeManualValues">08F73FD11868432DA73A9115342AA261</id>
+                    <rollup_manual_basis_label xml:lang="en">Estimated</rollup_manual_basis_label>
+                    <rollup_manual_value_prop>estimated_value</rollup_manual_value_prop>
+                    <rollup_related_calculated_prop>calculated_value</rollup_related_calculated_prop>
+                    <sort_order>10</sort_order>
+                    <source_id keyed_name="DFD75EEDAE19474AA02104D1F20791FD" type="ruc_TypeCalculatedValue">DFD75EEDAE19474AA02104D1F20791FD</source_id>
+                  </Item>
+                  <Item action="merge" type="ruc_TypeManualValues" typeId="29EF9ED481C045229459FE1053DCF4BA" id="5954E58D70DA4C4D82ECB79BAA7C23DE">
+                    <id keyed_name="5954E58D70DA4C4D82ECB79BAA7C23DE" type="ruc_TypeManualValues">5954E58D70DA4C4D82ECB79BAA7C23DE</id>
+                    <rollup_manual_basis_label xml:lang="en">Actual</rollup_manual_basis_label>
+                    <rollup_manual_value_prop>actual_value</rollup_manual_value_prop>
+                    <rollup_related_calculated_prop>calculated_value</rollup_related_calculated_prop>
+                    <sort_order>20</sort_order>
+                    <source_id keyed_name="DFD75EEDAE19474AA02104D1F20791FD" type="ruc_TypeCalculatedValue">DFD75EEDAE19474AA02104D1F20791FD</source_id>
+                  </Item>
+                </Relationships>
+              </Item>
+              <Item action="merge" type="ruc_TypeCalculatedValue" typeId="BF56EB93EBF14580A859D170D790D2F2" id="264F720866F04232B4EE0648BFF13DB3">
+                <id keyed_name="264F720866F04232B4EE0648BFF13DB3" type="ruc_TypeCalculatedValue">264F720866F04232B4EE0648BFF13DB3</id>
+                <rollup_basis_prop>cost_target_basis</rollup_basis_prop>
+                <rollup_calculated_basis_label xml:lang="en">Calculated</rollup_calculated_basis_label>
+                <rollup_calculated_value_prop>target_calculated_value</rollup_calculated_value_prop>
+                <rollup_calculation_name>Target cost values rollup</rollup_calculation_name>
+                <rollup_quantity_prop>quantity</rollup_quantity_prop>
+                <rollup_single_node_method>RollupSinglePartGoals</rollup_single_node_method>
+                <rollup_value_prop>cost_target</rollup_value_prop>
+                <sort_order>256</sort_order>
+                <source_id keyed_name="6B5C9A1FD65C49958DAA48308A1C26CD" type="ruc_TypeDefinition">6B5C9A1FD65C49958DAA48308A1C26CD</source_id>
+                <Relationships>
+                  <Item action="merge" type="ruc_TypeManualValues" typeId="29EF9ED481C045229459FE1053DCF4BA" id="348B2ED22BB4459EADDD82E58D824933">
+                    <id keyed_name="348B2ED22BB4459EADDD82E58D824933" type="ruc_TypeManualValues">348B2ED22BB4459EADDD82E58D824933</id>
+                    <rollup_manual_basis_label xml:lang="en">Target</rollup_manual_basis_label>
+                    <rollup_manual_value_prop>target_value</rollup_manual_value_prop>
+                    <rollup_related_calculated_prop>target_calculated_value</rollup_related_calculated_prop>
+                    <sort_order>10</sort_order>
+                    <source_id keyed_name="264F720866F04232B4EE0648BFF13DB3" type="ruc_TypeCalculatedValue">264F720866F04232B4EE0648BFF13DB3</source_id>
+                  </Item>
+                </Relationships>
+              </Item>
+            </Relationships>
+          </Item>
+          <Item action="merge" type="ruc_TypeDefinition" typeId="350297ED78034B8CA63E9D3CE30253ED" id="3739F4B14D5B4AF6A5647A66090122CD">
+            <id keyed_name="3739F4B14D5B4AF6A5647A66090122CD" type="ruc_TypeDefinition">3739F4B14D5B4AF6A5647A66090122CD</id>
+            <rollup_node_filter_condition>&lt;OR&gt;
+&lt;weight_basis&gt;Calculated&lt;/weight_basis&gt;
+&lt;weight_basis condition='is null' /&gt;
+&lt;/OR&gt;
+</rollup_node_filter_condition>
+            <rollup_struct_filter_condition is_null="1" />
+            <rollup_type>Weight</rollup_type>
+            <rollup_unit>kg</rollup_unit>
+            <rollup_unit_prop>weight_unit</rollup_unit_prop>
+            <sort_order>256</sort_order>
+            <source_id keyed_name="Part Part BOM" type="ruc_Definition">FC5B972870B34F90AE59BA7E6048E73C</source_id>
+            <Relationships>
+              <Item action="merge" type="ruc_TypeCalculatedValue" typeId="BF56EB93EBF14580A859D170D790D2F2" id="7184751C482B47D2AA4D79DD222D91CA">
+                <id keyed_name="7184751C482B47D2AA4D79DD222D91CA" type="ruc_TypeCalculatedValue">7184751C482B47D2AA4D79DD222D91CA</id>
+                <rollup_basis_prop>weight_basis</rollup_basis_prop>
+                <rollup_calculated_basis_label xml:lang="en">Calculated</rollup_calculated_basis_label>
+                <rollup_calculated_value_prop>calculated_value</rollup_calculated_value_prop>
+                <rollup_calculation_name>Actual cost values rollup</rollup_calculation_name>
+                <rollup_quantity_prop>quantity</rollup_quantity_prop>
+                <rollup_single_node_method>RollupSinglePartGoals</rollup_single_node_method>
+                <rollup_value_prop>weight</rollup_value_prop>
+                <sort_order>128</sort_order>
+                <source_id keyed_name="3739F4B14D5B4AF6A5647A66090122CD" type="ruc_TypeDefinition">3739F4B14D5B4AF6A5647A66090122CD</source_id>
+                <Relationships>
+                  <Item action="merge" type="ruc_TypeManualValues" typeId="29EF9ED481C045229459FE1053DCF4BA" id="5C04DD450592471A81D38B0CD194752E">
+                    <id keyed_name="5C04DD450592471A81D38B0CD194752E" type="ruc_TypeManualValues">5C04DD450592471A81D38B0CD194752E</id>
+                    <rollup_manual_basis_label xml:lang="en">Estimated</rollup_manual_basis_label>
+                    <rollup_manual_value_prop>estimated_value</rollup_manual_value_prop>
+                    <rollup_related_calculated_prop>calculated_value</rollup_related_calculated_prop>
+                    <sort_order>10</sort_order>
+                    <source_id keyed_name="7184751C482B47D2AA4D79DD222D91CA" type="ruc_TypeCalculatedValue">7184751C482B47D2AA4D79DD222D91CA</source_id>
+                  </Item>
+                  <Item action="merge" type="ruc_TypeManualValues" typeId="29EF9ED481C045229459FE1053DCF4BA" id="38A43B4020C54B18A9A6FAD12D384D4B">
+                    <id keyed_name="38A43B4020C54B18A9A6FAD12D384D4B" type="ruc_TypeManualValues">38A43B4020C54B18A9A6FAD12D384D4B</id>
+                    <rollup_manual_basis_label xml:lang="en">Actual</rollup_manual_basis_label>
+                    <rollup_manual_value_prop>actual_value</rollup_manual_value_prop>
+                    <rollup_related_calculated_prop>calculated_value</rollup_related_calculated_prop>
+                    <sort_order>20</sort_order>
+                    <source_id keyed_name="7184751C482B47D2AA4D79DD222D91CA" type="ruc_TypeCalculatedValue">7184751C482B47D2AA4D79DD222D91CA</source_id>
+                  </Item>
+                </Relationships>
+              </Item>
+              <Item action="merge" type="ruc_TypeCalculatedValue" typeId="BF56EB93EBF14580A859D170D790D2F2" id="CAF5B6EA36014433913F00BB85374C8D">
+                <id keyed_name="CAF5B6EA36014433913F00BB85374C8D" type="ruc_TypeCalculatedValue">CAF5B6EA36014433913F00BB85374C8D</id>
+                <rollup_basis_prop>weight_target_basis</rollup_basis_prop>
+                <rollup_calculated_basis_label xml:lang="en">Calculated</rollup_calculated_basis_label>
+                <rollup_calculated_value_prop>target_calculated_value</rollup_calculated_value_prop>
+                <rollup_calculation_name>Target cost values rollup</rollup_calculation_name>
+                <rollup_quantity_prop>quantity</rollup_quantity_prop>
+                <rollup_single_node_method>RollupSinglePartGoals</rollup_single_node_method>
+                <rollup_value_prop>weight_target</rollup_value_prop>
+                <sort_order>256</sort_order>
+                <source_id keyed_name="3739F4B14D5B4AF6A5647A66090122CD" type="ruc_TypeDefinition">3739F4B14D5B4AF6A5647A66090122CD</source_id>
+                <Relationships>
+                  <Item action="merge" type="ruc_TypeManualValues" typeId="29EF9ED481C045229459FE1053DCF4BA" id="E9B242D16F254000B6E55EBA65D7C1CD">
+                    <id keyed_name="E9B242D16F254000B6E55EBA65D7C1CD" type="ruc_TypeManualValues">E9B242D16F254000B6E55EBA65D7C1CD</id>
+                    <rollup_manual_basis_label xml:lang="en">Target</rollup_manual_basis_label>
+                    <rollup_manual_value_prop>target_value</rollup_manual_value_prop>
+                    <rollup_related_calculated_prop>target_calculated_value</rollup_related_calculated_prop>
+                    <sort_order>10</sort_order>
+                    <source_id keyed_name="CAF5B6EA36014433913F00BB85374C8D" type="ruc_TypeCalculatedValue">CAF5B6EA36014433913F00BB85374C8D</source_id>
+                  </Item>
+                </Relationships>
+              </Item>
+            </Relationships>
+          </Item>
+        </Relationships>
+      </Item>
+</AML>

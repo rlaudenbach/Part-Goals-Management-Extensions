@@ -1,0 +1,42 @@
+﻿<AML>
+ <Item type="Method" id="7B1A496F2A164817B23B02084528ADC1" action="add">
+  <comments>reads rollup configuration of a given structure</comments>
+  <execution_allowed_to keyed_name="World" type="Identity">A73B655731924CD0B027E4F4D5FCC0A9</execution_allowed_to>
+  <method_code><![CDATA[string rollupStructRelshipType = this.getAttribute("rollupStructRelshipType","invalid");  // force an error, if not provided
+string rollupNodeItemType = this.getAttribute("rollupNodeItemType","");
+string rollupValuesRelshipType = this.getAttribute("rollupValuesRelshipType","");
+
+string aml = "";
+
+aml += "<Item type='ruc_Definition' action='get' select='rollup_node_item_type,rollup_struct_relship_type,rollup_values_relship_type,rollup_service_method,rollup_types_list,rollup_type_prop,rollup_relship_unit_prop,description' >";
+aml += "<rollup_struct_relship_type>"+rollupStructRelshipType+"</rollup_struct_relship_type>";
+if (rollupNodeItemType != ""){
+aml += "<rollup_node_item_type>"+rollupNodeItemType+"</rollup_node_item_type>";    
+}
+if (rollupValuesRelshipType != "") {
+aml += "<rollup_values_relship_type>"+rollupValuesRelshipType+"</rollup_values_relship_type>";    
+}
+aml += "<Relationships>";
+aml += "<Item type='ruc_TypeDefinition' action='get' select='sort_order,rollup_type,rollup_basis_prop,rollup_unit_prop,rollup_unit,rollup_node_filter_condition,rollup_struct_filter_condition' >";
+aml += "<Relationships>";
+aml += "<Item type='ruc_TypeCalculatedValue' action='get' select='sort_order,rollup_calculation_name,rollup_value_prop,rollup_calculated_basis_label,rollup_calculated_value_prop,rollup_basis_prop,rollup_quantity_prop,rollup_single_node_method'>";
+aml += "<Relationships>";
+aml += "<Item type='ruc_TypeManualValues' action='get' select='sort_order,rollup_manual_basis_label,rollup_manual_value_prop,rollup_related_calculated_prop'>";
+aml += "</Item>";
+aml += "</Relationships>";
+aml += "</Item>";
+aml += "</Relationships>";
+aml += "</Item>";
+aml += "</Relationships>";
+aml += "</Item>";
+
+Item rollupDefinition = this.newItem("");
+rollupDefinition.loadAML(aml);
+rollupDefinition = rollupDefinition.apply();
+
+return rollupDefinition;
+]]></method_code>
+  <method_type>C#</method_type>
+  <name>ruc_GetRollupDefintion</name>
+ </Item>
+</AML>

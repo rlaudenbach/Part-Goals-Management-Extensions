@@ -1,0 +1,79 @@
+﻿<AML>
+ <Item type="Life Cycle Map" id="04406DC70C2342758D88C238B6D56F3A" action="add">
+  <start_state keyed_name="In Work" type="Life Cycle State">E82E3585821247E6BE82E0980075C6F8</start_state>
+  <name>ruc_Definition</name>
+  <Relationships>
+   <Item type="Life Cycle State" id="2E829E8A50B44CDF8BABB3D87DE05BAA" action="add">
+    <image>../images/LifeCycleState.svg</image>
+    <label xml:lang="en">Active</label>
+    <set_is_released>0</set_is_released>
+    <set_not_lockable>0</set_not_lockable>
+    <sort_order>256</sort_order>
+    <source_id keyed_name="ruc_Definition" type="Life Cycle Map">04406DC70C2342758D88C238B6D56F3A</source_id>
+    <x>184</x>
+    <y>41</y>
+    <name>Active</name>
+   </Item>
+   <Item type="Life Cycle State" id="D45329D3D9F94224B4A259D404C66F3D" action="add">
+    <image>../images/LifeCycleState.svg</image>
+    <label xml:lang="en">Disabled</label>
+    <set_is_released>0</set_is_released>
+    <set_not_lockable>0</set_not_lockable>
+    <sort_order>384</sort_order>
+    <source_id keyed_name="ruc_Definition" type="Life Cycle Map">04406DC70C2342758D88C238B6D56F3A</source_id>
+    <x>326</x>
+    <y>38</y>
+    <name>Disabled</name>
+   </Item>
+   <Item type="Life Cycle State" id="E82E3585821247E6BE82E0980075C6F8" action="add">
+    <image>../images/LifeCycleState.svg</image>
+    <label xml:lang="en">In Work</label>
+    <set_is_released>0</set_is_released>
+    <set_not_lockable>0</set_not_lockable>
+    <sort_order>128</sort_order>
+    <source_id keyed_name="ruc_Definition" type="Life Cycle Map">04406DC70C2342758D88C238B6D56F3A</source_id>
+    <x>33</x>
+    <y>39</y>
+    <name>In Work</name>
+   </Item>
+   <Item type="Life Cycle Transition" id="1668D835B5184B2DB4AD48AA3EFA5B93" action="add">
+    <from_state keyed_name="Active" type="Life Cycle State">2E829E8A50B44CDF8BABB3D87DE05BAA</from_state>
+    <get_comment>0</get_comment>
+    <role keyed_name="Administrators" type="Identity">2618D6F5A90949BAA7E920D1B04C7EE1</role>
+    <sort_order>384</sort_order>
+    <source_id keyed_name="ruc_Definition" type="Life Cycle Map">04406DC70C2342758D88C238B6D56F3A</source_id>
+    <to_state keyed_name="Disabled" type="Life Cycle State">D45329D3D9F94224B4A259D404C66F3D</to_state>
+   </Item>
+   <Item type="Life Cycle Transition" id="37F9D6B1EC634CF5A76DEFEB5B0599E0" action="add">
+    <from_state keyed_name="Active" type="Life Cycle State">2E829E8A50B44CDF8BABB3D87DE05BAA</from_state>
+    <get_comment>0</get_comment>
+    <role keyed_name="Administrators" type="Identity">2618D6F5A90949BAA7E920D1B04C7EE1</role>
+    <segments>110,22</segments>
+    <sort_order>256</sort_order>
+    <source_id keyed_name="ruc_Definition" type="Life Cycle Map">04406DC70C2342758D88C238B6D56F3A</source_id>
+    <to_state keyed_name="In Work" type="Life Cycle State">E82E3585821247E6BE82E0980075C6F8</to_state>
+    <x>-106</x>
+    <y>-31</y>
+   </Item>
+   <Item type="Life Cycle Transition" id="5D61B49C49014861A0B4752DD375C04E" action="add">
+    <from_state keyed_name="Disabled" type="Life Cycle State">D45329D3D9F94224B4A259D404C66F3D</from_state>
+    <get_comment>0</get_comment>
+    <role keyed_name="Administrators" type="Identity">2618D6F5A90949BAA7E920D1B04C7EE1</role>
+    <segments>249,16</segments>
+    <sort_order>512</sort_order>
+    <source_id keyed_name="ruc_Definition" type="Life Cycle Map">04406DC70C2342758D88C238B6D56F3A</source_id>
+    <to_state keyed_name="Active" type="Life Cycle State">2E829E8A50B44CDF8BABB3D87DE05BAA</to_state>
+    <x>-69</x>
+    <y>-23</y>
+   </Item>
+   <Item type="Life Cycle Transition" id="26893BD53FA84B74874CF76FC81724C3" action="add">
+    <from_state keyed_name="In Work" type="Life Cycle State">E82E3585821247E6BE82E0980075C6F8</from_state>
+    <get_comment>0</get_comment>
+    <role keyed_name="Administrators" type="Identity">2618D6F5A90949BAA7E920D1B04C7EE1</role>
+    <sort_order>128</sort_order>
+    <source_id keyed_name="ruc_Definition" type="Life Cycle Map">04406DC70C2342758D88C238B6D56F3A</source_id>
+    <to_state keyed_name="Active" type="Life Cycle State">2E829E8A50B44CDF8BABB3D87DE05BAA</to_state>
+   </Item>
+  </Relationships>
+ </Item>
+</AML>

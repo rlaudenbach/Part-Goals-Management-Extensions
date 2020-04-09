@@ -1,0 +1,41 @@
+﻿<AML>
+ <Item type="Method" id="E5B992E211C142619A23A40FE11867AC" action="add">
+  <execution_allowed_to keyed_name="Administrators" type="Identity">2618D6F5A90949BAA7E920D1B04C7EE1</execution_allowed_to>
+  <method_code><![CDATA[const report_query = '<Item type="Method" action="PE_ExecuteQdReportMethod">' +
+	'<query_definition>F67B2C5D10E0411EBEB665A36EDC9FE0</query_definition>' +
+	'<report_name>costing</report_name>' +
+	'<part_id>' + inDom.getAttribute('id') + '</part_id>' +
+'</Item>';
+
+let report = this.newItem('Report', 'get');
+report.setProperty('select', 'xsl_stylesheet');
+report.setID('5E2475D4F7844BDC9814482262E8E103'); // BOM Weight Goals Rollup Report"
+report = report.apply();
+
+let query = this.newItem();
+query.loadAML(report_query);
+query = query.apply();
+
+if (query.IsError()) {
+	aras.AlertError(query.getErrorString());
+}
+
+let results = query.dom.xml;
+let xsl_stylesheet = report.getProperty('xsl_stylesheet');
+if (xsl_stylesheet) {
+	const xslt_stylesheetDOM = aras.createXMLDocument();
+	xslt_stylesheetDOM.loadXML(xsl_stylesheet);
+
+	xsl_stylesheet = xslt_stylesheetDOM.xml;
+
+	const res = aras.createXMLDocument();
+	res.loadXML(results);
+
+	results = aras.applyXsltString(res, xsl_stylesheet);
+}
+
+return results;]]></method_code>
+  <method_type>JavaScript</method_type>
+  <name>PE_runWeightGoalRep_ApplyXslt</name>
+ </Item>
+</AML>

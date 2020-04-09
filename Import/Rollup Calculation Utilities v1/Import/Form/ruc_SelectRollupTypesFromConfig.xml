@@ -1,0 +1,79 @@
+﻿<AML>
+ <Item type="Form" id="FB2E3AA2B31D4FF783883AFD13D08E53" action="add">
+  <category_form>0</category_form>
+  <height>100</height>
+  <stylesheet><![CDATA[../styles/default.css]]></stylesheet>
+  <width>450</width>
+  <name>ruc_SelectRollupTypesFromConfig</name>
+  <Relationships>
+   <Item type="Body" id="D099C9CB21DA4FB3BD18B549CA95C917" action="add">
+    <sort_order>128</sort_order>
+    <source_id keyed_name="ruc_SelectRollupTypesFromConfig" type="Form">FB2E3AA2B31D4FF783883AFD13D08E53</source_id>
+    <Relationships>
+     <Item type="Field" id="9C6CC24F537146038C5EE9F9FFE6ACE8" action="add">
+      <border_width>0</border_width>
+      <display_length_unit>px</display_length_unit>
+      <field_type>button</field_type>
+      <font_color>#000000</font_color>
+      <font_family>arial, helvetica, sans-serif</font_family>
+      <font_size>8pt</font_size>
+      <font_weight>bold</font_weight>
+      <is_disabled>0</is_disabled>
+      <is_visible>1</is_visible>
+      <label xml:lang="en">Continue</label>
+      <label_position>top</label_position>
+      <list_no_blank>0</list_no_blank>
+      <sort_order>256</sort_order>
+      <source_id keyed_name="D099C9CB21DA4FB3BD18B549CA95C917" type="Body">D099C9CB21DA4FB3BD18B549CA95C917</source_id>
+      <tab_stop>1</tab_stop>
+      <x>185</x>
+      <y>20</y>
+      <name>btn_continue</name>
+      <Relationships>
+       <Item type="Field Event" id="732A9B52CF224F13A4265D074B28800B" action="add">
+        <field_event>onclick</field_event>
+        <related_id keyed_name="ruc_SelectRollupTypesDialog_cont" type="Method">
+         <Item type="Method" action="get" select="id">
+          <name>ruc_SelectRollupTypesDialog_cont</name>
+         </Item>
+        </related_id>
+        <sort_order>128</sort_order>
+        <source_id keyed_name="btn_continue" type="Field">9C6CC24F537146038C5EE9F9FFE6ACE8</source_id>
+       </Item>
+      </Relationships>
+     </Item>
+     <Item type="Field" id="680E0AC9996A40D39D681EA6C29CF492" action="add">
+      <border_width>0</border_width>
+      <display_length_unit>px</display_length_unit>
+      <field_type>text</field_type>
+      <font_color>#000000</font_color>
+      <font_family>arial, helvetica, sans-serif</font_family>
+      <font_size>8pt</font_size>
+      <font_weight>bold</font_weight>
+      <is_disabled>0</is_disabled>
+      <is_visible>1</is_visible>
+      <label xml:lang="en">Rollup Type</label>
+      <label_position>top</label_position>
+      <list_no_blank>0</list_no_blank>
+      <sort_order>128</sort_order>
+      <source_id keyed_name="D099C9CB21DA4FB3BD18B549CA95C917" type="Body">D099C9CB21DA4FB3BD18B549CA95C917</source_id>
+      <tab_stop>1</tab_stop>
+      <x>15</x>
+      <y>15</y>
+      <name>dd_select_rollup_type</name>
+     </Item>
+    </Relationships>
+   </Item>
+   <Item type="Form Event" id="E11FF37459A4454F897EE367E4920349" action="add">
+    <form_event>onformpopulated</form_event>
+    <related_id keyed_name="ruc_SelectRollupTypesDialog_api" type="Method">
+     <Item type="Method" action="get" select="id">
+      <name>ruc_SelectRollupTypesDialog_api</name>
+     </Item>
+    </related_id>
+    <sort_order>128</sort_order>
+    <source_id keyed_name="ruc_SelectRollupTypesFromConfig" type="Form">FB2E3AA2B31D4FF783883AFD13D08E53</source_id>
+   </Item>
+  </Relationships>
+ </Item>
+</AML>

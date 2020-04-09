@@ -1,0 +1,35 @@
+﻿<AML>
+ <Item type="Method" id="D86FF71CB9EB4BEDA9C2CF7903853EEF" action="add">
+  <execution_allowed_to keyed_name="World" type="Identity">A73B655731924CD0B027E4F4D5FCC0A9</execution_allowed_to>
+  <method_code><![CDATA[// context item: Part BOM
+Innovator inn = this.getInnovator();
+
+for (int i=0; i<this.getItemCount(); i++) {
+    Item pb= this.getItemByIndex(i);
+    Item p = pb.getRelatedItem();
+    if (p == null) {
+        string id = pb.getProperty("related_id","");
+        if (id != "") {
+            p = inn.getItemById("Part",id);
+        }
+    }
+    if (p != null) {
+        string s_qty = pb.getProperty("quantity","1");
+        decimal qty = Convert.ToDecimal(s_qty);
+        
+        string s_goal = p.getProperty("cost","0");
+        decimal goal = Convert.ToDecimal(s_goal);
+        
+        pb.setProperty("cost_per_qty", Convert.ToString(qty*goal));
+        
+        s_goal = p.getProperty("weight","0");
+        goal = Convert.ToDecimal(s_goal);
+        
+        pb.setProperty("weight_per_qty", Convert.ToString(qty*goal));
+    }
+}
+return this;]]></method_code>
+  <method_type>C#</method_type>
+  <name>FederatedPartGoalsByQty</name>
+ </Item>
+</AML>
