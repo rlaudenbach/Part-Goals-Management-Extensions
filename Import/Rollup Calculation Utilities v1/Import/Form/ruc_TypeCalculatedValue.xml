@@ -28,6 +28,7 @@
       <propertytype_id keyed_name="rollup_basis_prop" type="Property">6370675F9BAE4A85B16BABC0F2DB1849</propertytype_id>
       <sort_order>640</sort_order>
       <source_id keyed_name="5D306018250141F6A2E5A11EDCC73A63" type="Body">5D306018250141F6A2E5A11EDCC73A63</source_id>
+      <source_source_id keyed_name="ruc_TypeCalculatedValue" type="Form">AF0C6048DD134C5BA65D401D7AEFFB4A</source_source_id>
       <tab_index>110</tab_index>
       <tab_stop>1</tab_stop>
       <x>465</x>
@@ -51,6 +52,7 @@
       <propertytype_id keyed_name="rollup_calculated_basis_label" type="Property">05046AF0EA14445E9CDDEB5629AAEDDD</propertytype_id>
       <sort_order>256</sort_order>
       <source_id keyed_name="5D306018250141F6A2E5A11EDCC73A63" type="Body">5D306018250141F6A2E5A11EDCC73A63</source_id>
+      <source_source_id keyed_name="ruc_TypeCalculatedValue" type="Form">AF0C6048DD134C5BA65D401D7AEFFB4A</source_source_id>
       <tab_index>150</tab_index>
       <tab_stop>1</tab_stop>
       <x>250</x>
@@ -74,6 +76,7 @@
       <propertytype_id keyed_name="rollup_calculated_value_prop" type="Property">6CC8A9EA7BFE4318A65F1CA926D901CD</propertytype_id>
       <sort_order>128</sort_order>
       <source_id keyed_name="5D306018250141F6A2E5A11EDCC73A63" type="Body">5D306018250141F6A2E5A11EDCC73A63</source_id>
+      <source_source_id keyed_name="ruc_TypeCalculatedValue" type="Form">AF0C6048DD134C5BA65D401D7AEFFB4A</source_source_id>
       <tab_index>140</tab_index>
       <tab_stop>1</tab_stop>
       <x>465</x>
@@ -98,6 +101,7 @@
       <propertytype_id keyed_name="rollup_calculation_name" type="Property">9C529B16B63F4E7FB1B745903447FE45</propertytype_id>
       <sort_order>512</sort_order>
       <source_id keyed_name="5D306018250141F6A2E5A11EDCC73A63" type="Body">5D306018250141F6A2E5A11EDCC73A63</source_id>
+      <source_source_id keyed_name="ruc_TypeCalculatedValue" type="Form">AF0C6048DD134C5BA65D401D7AEFFB4A</source_source_id>
       <tab_index>10</tab_index>
       <tab_stop>1</tab_stop>
       <x>20</x>
@@ -120,6 +124,7 @@
       <propertytype_id keyed_name="rollup_quantity_prop" type="Property">F54AC35DD4594CFB8551AD21B07BFCC2</propertytype_id>
       <sort_order>768</sort_order>
       <source_id keyed_name="5D306018250141F6A2E5A11EDCC73A63" type="Body">5D306018250141F6A2E5A11EDCC73A63</source_id>
+      <source_source_id keyed_name="ruc_TypeCalculatedValue" type="Form">AF0C6048DD134C5BA65D401D7AEFFB4A</source_source_id>
       <tab_index>160</tab_index>
       <tab_stop>1</tab_stop>
       <x>755</x>
@@ -143,6 +148,7 @@
       <propertytype_id keyed_name="rollup_single_node_method" type="Property">3F070A369F484824802857DCE0EC7502</propertytype_id>
       <sort_order>384</sort_order>
       <source_id keyed_name="5D306018250141F6A2E5A11EDCC73A63" type="Body">5D306018250141F6A2E5A11EDCC73A63</source_id>
+      <source_source_id keyed_name="ruc_TypeCalculatedValue" type="Form">AF0C6048DD134C5BA65D401D7AEFFB4A</source_source_id>
       <tab_index>200</tab_index>
       <tab_stop>1</tab_stop>
       <x>20</x>
@@ -165,6 +171,7 @@
       <propertytype_id keyed_name="rollup_value_prop" type="Property">52227BDAA616424D961431DB2D450E44</propertytype_id>
       <sort_order>896</sort_order>
       <source_id keyed_name="5D306018250141F6A2E5A11EDCC73A63" type="Body">5D306018250141F6A2E5A11EDCC73A63</source_id>
+      <source_source_id keyed_name="ruc_TypeCalculatedValue" type="Form">AF0C6048DD134C5BA65D401D7AEFFB4A</source_source_id>
       <tab_index>105</tab_index>
       <tab_stop>1</tab_stop>
       <x>250</x>

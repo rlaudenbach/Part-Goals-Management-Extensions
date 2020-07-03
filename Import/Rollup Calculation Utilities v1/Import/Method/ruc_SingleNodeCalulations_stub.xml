@@ -1,0 +1,44 @@
+﻿<AML>
+ <Item type="Method" id="B054297DC1DE4A13B29CBB1385EFB22E" action="add">
+  <comments>!!! you must clone this method and add your custom logic</comments>
+  <execution_allowed_to keyed_name="World" type="Identity">A73B655731924CD0B027E4F4D5FCC0A9</execution_allowed_to>
+  <method_code><![CDATA[//System.Diagnostics.Debugger.Launch();System.Diagnostics.Debugger.Break();
+
+// context item = the item type of a "node" in the structure to do rollups in  (such as "Part")
+
+
+// This method must me listed in your "Rollup Definition" to use.
+// It gets called recurively by method "ruc_StructResolutionRunCallbacks"
+
+// read args (with relevant rollup configuration settings)
+string rollupType = this.getAttribute("rollupType", "");
+string rollupTypePropName = this.getAttribute("rollupTypePropName", "");
+string rollupValuePropName = this.getAttribute("rollupValuePropName", "");
+string rollupBasisPropName = this.getAttribute("rollupBasisPropName", "");
+string rollupStructRelshipType = this.getAttribute("rollupStructRelshipType", "");
+string rollupValuesRelshipType = this.getAttribute("rollupValuesRelshipType", "");
+string rollupCalculatedValuePropName = this.getAttribute("rollupCalculatedValuePropName", "");
+string rollupCalculatedBasisLabel = this.getAttribute("rollupCalculatedBasisLabel", "");
+string rollupRollupQuantityPropName = this.getAttribute("rollupRollupQuantityPropName", "");
+string rollupRelshipUnitPropName = this.getAttribute("rollupRelshipUnitPropName", "");
+string rollupUnitPropName = this.getAttribute("rollupUnitPropName", "");
+string rollupManualValuePropNames = this.getAttribute("rollupManualValuePropNames", "");   // --> comma separated (precedence: right to Left)
+string rollupManualBasisLabels = this.getAttribute("rollupManualBasisLabels", "");         //--> comma separated (aligned with ManualPropNames)
+
+// add your custom logic here ....
+
+// a typical rollup calculation:
+// - read the children of relationship defined in "rollupStructRelshipType" of this node  (item = this)
+// - from each child read the current "calculated" value
+// - then do the math ... i.e. sum of all calculated values * quantity value of each usage
+// - Set the new calculated value of property "rollupCalculatedValuePropName" on this node
+// - Also set the basis label of property "rollupCalculatedBasisLabel" to indicate this is a "calculated value" on this node
+// - The changed values of all properties of this node must be applied to update on the server (use of applySQL would be OK here)
+
+
+return this.getInnovator().newError("Method: 'ruc_SingleNodeCalulations_stub' cannot be used in Rollup Defintions ! It must be cloned and extended with appropriate logic. The clone method can be used in Rollup Definitions.");
+]]></method_code>
+  <method_type>C#</method_type>
+  <name>ruc_SingleNodeCalulations_stub</name>
+ </Item>
+</AML>

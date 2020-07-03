@@ -25,6 +25,7 @@
       <list_no_blank>0</list_no_blank>
       <sort_order>256</sort_order>
       <source_id keyed_name="D099C9CB21DA4FB3BD18B549CA95C917" type="Body">D099C9CB21DA4FB3BD18B549CA95C917</source_id>
+      <source_source_id keyed_name="ruc_SelectRollupTypesFromConfig" type="Form">FB2E3AA2B31D4FF783883AFD13D08E53</source_source_id>
       <tab_stop>1</tab_stop>
       <x>185</x>
       <y>20</y>
@@ -57,6 +58,7 @@
       <list_no_blank>0</list_no_blank>
       <sort_order>128</sort_order>
       <source_id keyed_name="D099C9CB21DA4FB3BD18B549CA95C917" type="Body">D099C9CB21DA4FB3BD18B549CA95C917</source_id>
+      <source_source_id keyed_name="ruc_SelectRollupTypesFromConfig" type="Form">FB2E3AA2B31D4FF783883AFD13D08E53</source_source_id>
       <tab_stop>1</tab_stop>
       <x>15</x>
       <y>15</y>

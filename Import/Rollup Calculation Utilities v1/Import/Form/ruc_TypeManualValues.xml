@@ -28,6 +28,7 @@
       <propertytype_id keyed_name="rollup_manual_basis_label" type="Property">3CDDB4013D004D3AA671D34BC1F52325</propertytype_id>
       <sort_order>384</sort_order>
       <source_id keyed_name="A6215FA36D704AF499037C3DD1F466C5" type="Body">A6215FA36D704AF499037C3DD1F466C5</source_id>
+      <source_source_id keyed_name="ruc_TypeManualValues" type="Form">E08B3F44B2784C0FB34675D6FD5B3C86</source_source_id>
       <tab_index>20</tab_index>
       <tab_stop>1</tab_stop>
       <x>115</x>
@@ -51,11 +52,35 @@
       <propertytype_id keyed_name="rollup_manual_value_prop" type="Property">F3F0E59BA26B46BF8B7DF168FADD7371</propertytype_id>
       <sort_order>256</sort_order>
       <source_id keyed_name="A6215FA36D704AF499037C3DD1F466C5" type="Body">A6215FA36D704AF499037C3DD1F466C5</source_id>
+      <source_source_id keyed_name="ruc_TypeManualValues" type="Form">E08B3F44B2784C0FB34675D6FD5B3C86</source_source_id>
       <tab_index>10</tab_index>
       <tab_stop>1</tab_stop>
       <x>115</x>
       <y>10</y>
       <name>rollup_manual_value_prop</name>
+     </Item>
+     <Item type="Field" id="341A9BAF2E414E6681BD38015E34C4D0" action="add">
+      <border_width>0</border_width>
+      <display_length_unit>px</display_length_unit>
+      <field_type>text</field_type>
+      <font_color>#000000</font_color>
+      <font_family>arial, helvetica, sans-serif</font_family>
+      <font_size>8pt</font_size>
+      <font_weight>bold</font_weight>
+      <is_disabled>0</is_disabled>
+      <is_visible>1</is_visible>
+      <label xml:lang="en">Related Calculated Property (on Rollup Rel)</label>
+      <label_position>top</label_position>
+      <list_no_blank>0</list_no_blank>
+      <propertytype_id keyed_name="rollup_related_calculated_prop" type="Property">1C0C3A4AEC924A2BBFD8C767AD210AE9</propertytype_id>
+      <sort_order>512</sort_order>
+      <source_id keyed_name="A6215FA36D704AF499037C3DD1F466C5" type="Body">A6215FA36D704AF499037C3DD1F466C5</source_id>
+      <source_source_id keyed_name="ruc_TypeManualValues" type="Form">E08B3F44B2784C0FB34675D6FD5B3C86</source_source_id>
+      <tab_index>50</tab_index>
+      <tab_stop>1</tab_stop>
+      <x>410</x>
+      <y>10</y>
+      <name>rollup_related_calculated_prop</name>
      </Item>
      <Item type="Field" id="C55D01DFA34E4F5889755F798F18E1B4" action="add">
       <border_width>0</border_width>
@@ -73,6 +98,7 @@
       <list_no_blank>0</list_no_blank>
       <sort_order>128</sort_order>
       <source_id keyed_name="A6215FA36D704AF499037C3DD1F466C5" type="Body">A6215FA36D704AF499037C3DD1F466C5</source_id>
+      <source_source_id keyed_name="ruc_TypeManualValues" type="Form">E08B3F44B2784C0FB34675D6FD5B3C86</source_source_id>
       <tab_index>8</tab_index>
       <tab_stop>1</tab_stop>
       <x>10</x>

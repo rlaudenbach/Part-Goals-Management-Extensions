@@ -11,9 +11,9 @@
   <is_versionable>0</is_versionable>
   <label xml:lang="en">Rollup Definition</label>
   <label_plural xml:lang="en">Rollup Definitions</label_plural>
-  <large_icon>../Images/CFGRule.svg</large_icon>
+  <large_icon>../Images/Custom/ruc/ruc_Definition.svg</large_icon>
   <maxrecords>500</maxrecords>
-  <open_icon>../Images/CFGRule.svg</open_icon>
+  <open_icon>../Images/Custom/ruc/ruc_Definition.svg</open_icon>
   <revisions keyed_name="Default" type="Revision">7FE395DD8B9F4E1090756A34B733D75E</revisions>
   <show_parameters_tab>1</show_parameters_tab>
   <structure_view>tabs on</structure_view>
@@ -21,6 +21,12 @@
   <use_src_access>0</use_src_access>
   <name>ruc_Definition</name>
   <Relationships>
+   <Item type="ITPresentationConfiguration" id="82881DEF5E086F8B6B77D6069BFA2DFF" action="add">
+    <client>js</client>
+    <related_id keyed_name="ruc_Definition_TOC_Configuration" type="PresentationConfiguration">82881DEF5E086F8B36326AA7318BB90D</related_id>
+    <sort_order>128</sort_order>
+    <source_id keyed_name="ruc_Definition" type="ItemType" name="ruc_Definition">4951A0E012E44CE09EE236D54CA8DCA2</source_id>
+   </Item>
    <Item type="Property" id="096FAC7655AB42C19D5C3AA74EB4FEC7" action="add">
     <column_alignment>left</column_alignment>
     <column_width>300</column_width>
