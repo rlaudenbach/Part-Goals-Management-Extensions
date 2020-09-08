@@ -1,0 +1,262 @@
+﻿<AML>
+ <Item type="Form" id="CAF99D0A8E6E44E9A681C38015FACE91" action="add">
+  <category_form>0</category_form>
+  <height>290</height>
+  <stylesheet><![CDATA[../styles/default.css]]></stylesheet>
+  <width>784</width>
+  <name>Part</name>
+  <Relationships>
+   <Item type="Body" id="83907DEF8B3044A08BDCBB77B1C0517E" action="add">
+    <bg_color>#f5f5f5</bg_color>
+    <sort_order>128</sort_order>
+    <source_id keyed_name="Part" type="Form">CAF99D0A8E6E44E9A681C38015FACE91</source_id>
+    <Relationships>
+     <Item type="Field" id="74753A9B28324AE4AA0B608F55755441" action="add">
+      <border_width>0</border_width>
+      <display_length_unit>px</display_length_unit>
+      <field_type>html</field_type>
+      <font_color>#000000</font_color>
+      <font_family>arial, helvetica, sans-serif</font_family>
+      <font_size>8pt</font_size>
+      <font_weight>bold</font_weight>
+      <html_code><![CDATA[<span class="sys_view_file_link" id="cost_basis" onclick="window.showGoalsTab();"></span>]]></html_code>
+      <is_disabled>0</is_disabled>
+      <is_visible>1</is_visible>
+      <list_no_blank>0</list_no_blank>
+      <sort_order>640</sort_order>
+      <source_id keyed_name="83907DEF8B3044A08BDCBB77B1C0517E" type="Body">83907DEF8B3044A08BDCBB77B1C0517E</source_id>
+      <tab_stop>1</tab_stop>
+      <x>800</x>
+      <y>25</y>
+      <name>cost_basis</name>
+     </Item>
+     <Item type="Field" id="E8482A6B138B4625802A5A0B43FAF06E" action="add">
+      <border_width>0</border_width>
+      <display_length>80</display_length>
+      <display_length_unit>px</display_length_unit>
+      <field_type>text</field_type>
+      <font_color>#000000</font_color>
+      <font_family>tahoma, arial, helvetica, sans-serif</font_family>
+      <font_size>8pt</font_size>
+      <font_weight>bold</font_weight>
+      <is_disabled>1</is_disabled>
+      <is_visible>1</is_visible>
+      <label xml:lang="en">Target Cost/Unit</label>
+      <label_position>top</label_position>
+      <list_no_blank>0</list_no_blank>
+      <propertytype_id keyed_name="cost_target" type="Property">EEBA3E7CF71542E486B43339A08243A0</propertytype_id>
+      <sort_order>6016</sort_order>
+      <source_id keyed_name="83907DEF8B3044A08BDCBB77B1C0517E" type="Body">83907DEF8B3044A08BDCBB77B1C0517E</source_id>
+      <tab_index>900</tab_index>
+      <tab_stop>1</tab_stop>
+      <x>880</x>
+      <y>10</y>
+      <name>cost_target</name>
+     </Item>
+     <Item type="Field" id="6311903ECCAC4101989C0AB3BD46F68A" action="add">
+      <border_width>0</border_width>
+      <display_length_unit>px</display_length_unit>
+      <field_type>html</field_type>
+      <font_color>#000000</font_color>
+      <font_family>arial, helvetica, sans-serif</font_family>
+      <font_size>8pt</font_size>
+      <font_weight>bold</font_weight>
+      <html_code><![CDATA[<span class="sys_view_file_link" id="cost_target_basis" onclick="window.showGoalsTab();"></span>]]></html_code>
+      <is_disabled>0</is_disabled>
+      <is_visible>1</is_visible>
+      <label_position>top</label_position>
+      <list_no_blank>0</list_no_blank>
+      <sort_order>6528</sort_order>
+      <source_id keyed_name="83907DEF8B3044A08BDCBB77B1C0517E" type="Body">83907DEF8B3044A08BDCBB77B1C0517E</source_id>
+      <tab_stop>1</tab_stop>
+      <x>970</x>
+      <y>25</y>
+      <name>cost_target_basis</name>
+     </Item>
+     <Item type="Field" id="A5F141BE183C46EF9D14F9651319189E" action="add">
+      <border_width>0</border_width>
+      <display_length>30</display_length>
+      <display_length_unit>px</display_length_unit>
+      <field_type>text</field_type>
+      <font_color>#000000</font_color>
+      <font_family>tahoma, arial, helvetica, sans-serif</font_family>
+      <font_size>8pt</font_size>
+      <font_weight>bold</font_weight>
+      <is_disabled>1</is_disabled>
+      <is_visible>1</is_visible>
+      <label xml:lang="en">Currency</label>
+      <label_position>top</label_position>
+      <list_no_blank>0</list_no_blank>
+      <propertytype_id keyed_name="cost_unit" type="Property">750932331EE245948C88D349B71462BC</propertytype_id>
+      <sort_order>5760</sort_order>
+      <source_id keyed_name="83907DEF8B3044A08BDCBB77B1C0517E" type="Body">83907DEF8B3044A08BDCBB77B1C0517E</source_id>
+      <tab_index>899</tab_index>
+      <tab_stop>1</tab_stop>
+      <x>655</x>
+      <y>10</y>
+      <name>cost_unit</name>
+     </Item>
+     <Item type="Field" id="F622B99ED01E4A74A41802A2CD43365B" action="add">
+      <border_width>0</border_width>
+      <display_length>80</display_length>
+      <display_length_unit>px</display_length_unit>
+      <field_type>text</field_type>
+      <font_color>#000000</font_color>
+      <font_family>tahoma, arial, helvetica, sans-serif</font_family>
+      <font_size>8pt</font_size>
+      <font_weight>bold</font_weight>
+      <is_disabled>1</is_disabled>
+      <is_visible>1</is_visible>
+      <label xml:lang="en">Weight/Unit</label>
+      <label_position>top</label_position>
+      <list_no_blank>0</list_no_blank>
+      <propertytype_id keyed_name="weight" type="Property">2E05616329F846C78C0A8F8468AC1EF8</propertytype_id>
+      <sort_order>5504</sort_order>
+      <source_id keyed_name="83907DEF8B3044A08BDCBB77B1C0517E" type="Body">83907DEF8B3044A08BDCBB77B1C0517E</source_id>
+      <tab_index>1536</tab_index>
+      <tab_stop>1</tab_stop>
+      <x>710</x>
+      <y>45</y>
+      <name>weight</name>
+     </Item>
+     <Item type="Field" id="5945BE4866034939830ADFC63A09D59A" action="add">
+      <border_width>0</border_width>
+      <display_length_unit>px</display_length_unit>
+      <field_type>html</field_type>
+      <font_color>#000000</font_color>
+      <font_family>tahoma, arial, helvetica, sans-serif</font_family>
+      <font_size>8pt</font_size>
+      <font_weight>bold</font_weight>
+      <html_code><![CDATA[<span class="sys_view_file_link" id="weight_basis" onclick="window.showGoalsTab();"></span>]]></html_code>
+      <is_disabled>0</is_disabled>
+      <is_visible>1</is_visible>
+      <label_position>top</label_position>
+      <list_no_blank>0</list_no_blank>
+      <sort_order>5632</sort_order>
+      <source_id keyed_name="83907DEF8B3044A08BDCBB77B1C0517E" type="Body">83907DEF8B3044A08BDCBB77B1C0517E</source_id>
+      <tab_stop>1</tab_stop>
+      <x>800</x>
+      <y>60</y>
+      <name>weight_basis</name>
+     </Item>
+     <Item type="Field" id="83D1F615089E4F38B6D7037C1552F7B8" action="add">
+      <border_width>0</border_width>
+      <display_length>80</display_length>
+      <display_length_unit>px</display_length_unit>
+      <field_type>text</field_type>
+      <font_color>#000000</font_color>
+      <font_family>tahoma, arial, helvetica, sans-serif</font_family>
+      <font_size>8pt</font_size>
+      <font_weight>bold</font_weight>
+      <is_disabled>1</is_disabled>
+      <is_visible>1</is_visible>
+      <label xml:lang="en">Target Weight/Unit</label>
+      <label_position>top</label_position>
+      <list_no_blank>0</list_no_blank>
+      <propertytype_id keyed_name="weight_target" type="Property">D6B069F8E58B4DECA60C90BF704D9885</propertytype_id>
+      <sort_order>6144</sort_order>
+      <source_id keyed_name="83907DEF8B3044A08BDCBB77B1C0517E" type="Body">83907DEF8B3044A08BDCBB77B1C0517E</source_id>
+      <tab_index>903</tab_index>
+      <tab_stop>1</tab_stop>
+      <x>880</x>
+      <y>45</y>
+      <name>weight_target</name>
+     </Item>
+     <Item type="Field" id="623FEF61F51F4662ABE55B7B1CA0614B" action="add">
+      <border_width>0</border_width>
+      <display_length_unit>px</display_length_unit>
+      <field_type>html</field_type>
+      <font_color>#000000</font_color>
+      <font_family>arial, helvetica, sans-serif</font_family>
+      <font_size>8pt</font_size>
+      <font_weight>bold</font_weight>
+      <html_code><![CDATA[<span class="sys_view_file_link" id="weight_target_basis" onclick="window.showGoalsTab();"></span>]]></html_code>
+      <is_disabled>0</is_disabled>
+      <is_visible>1</is_visible>
+      <label_position>top</label_position>
+      <list_no_blank>0</list_no_blank>
+      <sort_order>6400</sort_order>
+      <source_id keyed_name="83907DEF8B3044A08BDCBB77B1C0517E" type="Body">83907DEF8B3044A08BDCBB77B1C0517E</source_id>
+      <tab_stop>1</tab_stop>
+      <x>970</x>
+      <y>60</y>
+      <name>weight_target_basis</name>
+     </Item>
+     <Item type="Field" id="29E54CCCEAB941A7A580CBA50B4976D4" action="add">
+      <border_width>0</border_width>
+      <display_length>30</display_length>
+      <display_length_unit>px</display_length_unit>
+      <field_type>text</field_type>
+      <font_color>#000000</font_color>
+      <font_family>tahoma, arial, helvetica, sans-serif</font_family>
+      <font_size>8pt</font_size>
+      <font_weight>bold</font_weight>
+      <is_disabled>0</is_disabled>
+      <is_visible>1</is_visible>
+      <label xml:lang="en">W-Unit</label>
+      <label_position>top</label_position>
+      <list_no_blank>0</list_no_blank>
+      <propertytype_id keyed_name="weight_unit" type="Property">378958C7E97D40EEB42F81374C15A54D</propertytype_id>
+      <sort_order>5888</sort_order>
+      <source_id keyed_name="83907DEF8B3044A08BDCBB77B1C0517E" type="Body">83907DEF8B3044A08BDCBB77B1C0517E</source_id>
+      <tab_index>902</tab_index>
+      <tab_stop>1</tab_stop>
+      <x>655</x>
+      <y>45</y>
+      <name>weight_unit</name>
+     </Item>
+     <Item type="Field" id="4E5F596D35B54338AF036135AE00A29A" action="add">
+      <border_width>0</border_width>
+      <display_length_unit>px</display_length_unit>
+      <field_type>xclass</field_type>
+      <font_color>#000000</font_color>
+      <font_family>tahoma, arial, helvetica, sans-serif</font_family>
+      <font_size>8pt</font_size>
+      <font_weight>bold</font_weight>
+      <is_disabled>0</is_disabled>
+      <is_visible>1</is_visible>
+      <label xml:lang="en">Extended Classification</label>
+      <label_position>top</label_position>
+      <list_no_blank>0</list_no_blank>
+      <sort_order>4736</sort_order>
+      <source_id keyed_name="83907DEF8B3044A08BDCBB77B1C0517E" type="Body">83907DEF8B3044A08BDCBB77B1C0517E</source_id>
+      <tab_stop>1</tab_stop>
+      <x>1100</x>
+      <y>10</y>
+      <name>xclass</name>
+     </Item>
+    </Relationships>
+   </Item>
+   <Item type="Form Event" id="083FAE66781C43FA97BF7233CFA8E516" action="add">
+    <form_event>onformpopulated</form_event>
+    <related_id keyed_name="Fill Form Fields" type="Method">
+     <Item type="Method" action="get" select="id">
+      <name>Fill Form Fields</name>
+     </Item>
+    </related_id>
+    <sort_order>128</sort_order>
+    <source_id keyed_name="Part" type="Form">CAF99D0A8E6E44E9A681C38015FACE91</source_id>
+   </Item>
+   <Item type="Form Event" id="0FF63C23E8DC45F7AD9FBDA29BB8680F" action="add">
+    <form_event>onformpopulated</form_event>
+    <related_id keyed_name="Show Goal Basis" type="Method">
+     <Item type="Method" action="get" select="id">
+      <name>Show Goal Basis</name>
+     </Item>
+    </related_id>
+    <sort_order>256</sort_order>
+    <source_id keyed_name="Part" type="Form">CAF99D0A8E6E44E9A681C38015FACE91</source_id>
+   </Item>
+   <Item type="Form Event" id="0D45C48420FB4198B555FEFE21F88718" action="add">
+    <form_event>onformpopulated</form_event>
+    <related_id keyed_name="Show Goal Target Basis" type="Method">
+     <Item type="Method" action="get" select="id">
+      <name>Show Goal Target Basis</name>
+     </Item>
+    </related_id>
+    <sort_order>257</sort_order>
+    <source_id keyed_name="Part" type="Form">CAF99D0A8E6E44E9A681C38015FACE91</source_id>
+   </Item>
+  </Relationships>
+ </Item>
+</AML>

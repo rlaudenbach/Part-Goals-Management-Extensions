@@ -226,15 +226,6 @@
      </Item>
     </Relationships>
    </Item>
-   <Item type="Form Event" id="15EA08249E414A879233524C991EEC7C" action="add">
-    <related_id keyed_name="useCustomStyleOnForm" type="Method">
-     <Item type="Method" action="get" select="id">
-      <name>useCustomStyleOnForm</name>
-     </Item>
-    </related_id>
-    <sort_order>128</sort_order>
-    <source_id keyed_name="ruc_Definition" type="Form">666DDA14B8464B329A9BB416A4F24330</source_id>
-   </Item>
   </Relationships>
  </Item>
 </AML>

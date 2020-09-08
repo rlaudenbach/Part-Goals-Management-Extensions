@@ -1,3 +1,0 @@
-<imports>
-  <package name="Rollup Calculation Utilities" path="Rollup Calculation Utilities v1\Import" />
-</imports>

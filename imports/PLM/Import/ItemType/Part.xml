@@ -1,0 +1,280 @@
+﻿<AML>
+ <Item type="ItemType" id="4F1AC04A2B484F3ABA4E20DB63808A88" action="add">
+  <name>Part</name>
+  <Relationships>
+   <Item type="Property" id="074E4827E5044F8BA6B6FD546E21D271" action="add">
+    <column_alignment>right</column_alignment>
+    <column_width>80</column_width>
+    <data_type>decimal</data_type>
+    <is_hidden>0</is_hidden>
+    <is_hidden2>0</is_hidden2>
+    <is_indexed>0</is_indexed>
+    <is_keyed>0</is_keyed>
+    <is_multi_valued>0</is_multi_valued>
+    <is_required>0</is_required>
+    <label xml:lang="en">Cost/Unit</label>
+    <prec>19</prec>
+    <range_inclusive>0</range_inclusive>
+    <readonly>1</readonly>
+    <scale>4</scale>
+    <sort_order>896</sort_order>
+    <source_id keyed_name="Part" type="ItemType" name="Part">4F1AC04A2B484F3ABA4E20DB63808A88</source_id>
+    <track_history>0</track_history>
+    <name>cost</name>
+   </Item>
+   <Item type="Property" id="AC04927AA0D645DE8657E956C8449F8F" action="add">
+    <column_alignment>left</column_alignment>
+    <column_width>100</column_width>
+    <data_source keyed_name="Goal Basis">540DD8228C8043BD905BF401D245926E</data_source>
+    <data_type>list</data_type>
+    <is_hidden>0</is_hidden>
+    <is_hidden2>0</is_hidden2>
+    <is_indexed>0</is_indexed>
+    <is_keyed>0</is_keyed>
+    <is_multi_valued>0</is_multi_valued>
+    <is_required>0</is_required>
+    <label xml:lang="en">Cost Basis</label>
+    <range_inclusive>0</range_inclusive>
+    <readonly>1</readonly>
+    <sort_order>898</sort_order>
+    <source_id keyed_name="Part" type="ItemType" name="Part">4F1AC04A2B484F3ABA4E20DB63808A88</source_id>
+    <stored_length>64</stored_length>
+    <track_history>0</track_history>
+    <name>cost_basis</name>
+   </Item>
+   <Item type="Property" id="ED1C06B96F2F42EC94E9911826A35048" action="add">
+    <column_alignment>left</column_alignment>
+    <column_width>80</column_width>
+    <data_type>boolean</data_type>
+    <is_hidden>0</is_hidden>
+    <is_hidden2>1</is_hidden2>
+    <is_indexed>0</is_indexed>
+    <is_keyed>0</is_keyed>
+    <is_multi_valued>0</is_multi_valued>
+    <is_required>0</is_required>
+    <label xml:lang="en">Cost has Goals</label>
+    <range_inclusive>0</range_inclusive>
+    <readonly>0</readonly>
+    <sort_order>902</sort_order>
+    <source_id keyed_name="Part" type="ItemType" name="Part">4F1AC04A2B484F3ABA4E20DB63808A88</source_id>
+    <track_history>0</track_history>
+    <name>cost_has_goals</name>
+   </Item>
+   <Item type="Property" id="EEBA3E7CF71542E486B43339A08243A0" action="add">
+    <column_alignment>left</column_alignment>
+    <column_width>80</column_width>
+    <data_type>decimal</data_type>
+    <is_hidden>0</is_hidden>
+    <is_hidden2>0</is_hidden2>
+    <is_indexed>0</is_indexed>
+    <is_keyed>0</is_keyed>
+    <is_multi_valued>0</is_multi_valued>
+    <is_required>0</is_required>
+    <label xml:lang="en">Target Cost/Unit</label>
+    <prec>19</prec>
+    <range_inclusive>0</range_inclusive>
+    <readonly>1</readonly>
+    <scale>4</scale>
+    <sort_order>900</sort_order>
+    <source_id keyed_name="Part" type="ItemType" name="Part">4F1AC04A2B484F3ABA4E20DB63808A88</source_id>
+    <track_history>0</track_history>
+    <name>cost_target</name>
+   </Item>
+   <Item type="Property" id="DE8DA077099048DABCDB5C7F421AE131" action="add">
+    <column_alignment>left</column_alignment>
+    <column_width>100</column_width>
+    <data_source keyed_name="Goal Basis">540DD8228C8043BD905BF401D245926E</data_source>
+    <data_type>list</data_type>
+    <is_hidden>0</is_hidden>
+    <is_hidden2>0</is_hidden2>
+    <is_indexed>0</is_indexed>
+    <is_keyed>0</is_keyed>
+    <is_multi_valued>0</is_multi_valued>
+    <is_required>0</is_required>
+    <label xml:lang="en">Cost Target Basis</label>
+    <range_inclusive>0</range_inclusive>
+    <readonly>1</readonly>
+    <sort_order>901</sort_order>
+    <source_id keyed_name="Part" type="ItemType" name="Part">4F1AC04A2B484F3ABA4E20DB63808A88</source_id>
+    <stored_length>64</stored_length>
+    <track_history>0</track_history>
+    <name>cost_target_basis</name>
+   </Item>
+   <Item type="Property" id="750932331EE245948C88D349B71462BC" action="add">
+    <column_alignment>left</column_alignment>
+    <column_width>50</column_width>
+    <data_type>string</data_type>
+    <default_value xml:lang="en">USD</default_value>
+    <is_hidden>0</is_hidden>
+    <is_hidden2>0</is_hidden2>
+    <is_indexed>0</is_indexed>
+    <is_keyed>0</is_keyed>
+    <is_multi_valued>0</is_multi_valued>
+    <is_required>0</is_required>
+    <label xml:lang="en">Currency</label>
+    <range_inclusive>0</range_inclusive>
+    <readonly>1</readonly>
+    <sort_order>899</sort_order>
+    <source_id keyed_name="Part" type="ItemType" name="Part">4F1AC04A2B484F3ABA4E20DB63808A88</source_id>
+    <stored_length>5</stored_length>
+    <track_history>0</track_history>
+    <name>cost_unit</name>
+   </Item>
+   <Item type="Property" id="2E05616329F846C78C0A8F8468AC1EF8" action="add">
+    <column_alignment>left</column_alignment>
+    <column_width>80</column_width>
+    <data_type>decimal</data_type>
+    <is_hidden>0</is_hidden>
+    <is_hidden2>0</is_hidden2>
+    <is_indexed>0</is_indexed>
+    <is_keyed>0</is_keyed>
+    <is_multi_valued>0</is_multi_valued>
+    <is_required>0</is_required>
+    <label xml:lang="en">Weight/Unit</label>
+    <prec>19</prec>
+    <range_inclusive>0</range_inclusive>
+    <readonly>1</readonly>
+    <scale>4</scale>
+    <sort_order>910</sort_order>
+    <source_id keyed_name="Part" type="ItemType" name="Part">4F1AC04A2B484F3ABA4E20DB63808A88</source_id>
+    <track_history>0</track_history>
+    <name>weight</name>
+   </Item>
+   <Item type="Property" id="17FB1B0DEC8F47449E8B2A2A503B9A86" action="add">
+    <column_alignment>left</column_alignment>
+    <column_width>100</column_width>
+    <data_source keyed_name="Goal Basis">540DD8228C8043BD905BF401D245926E</data_source>
+    <data_type>list</data_type>
+    <is_hidden>0</is_hidden>
+    <is_hidden2>0</is_hidden2>
+    <is_indexed>0</is_indexed>
+    <is_keyed>0</is_keyed>
+    <is_multi_valued>0</is_multi_valued>
+    <is_required>0</is_required>
+    <label xml:lang="en">Weight Basis</label>
+    <range_inclusive>0</range_inclusive>
+    <readonly>1</readonly>
+    <sort_order>911</sort_order>
+    <source_id keyed_name="Part" type="ItemType" name="Part">4F1AC04A2B484F3ABA4E20DB63808A88</source_id>
+    <stored_length>64</stored_length>
+    <track_history>0</track_history>
+    <name>weight_basis</name>
+   </Item>
+   <Item type="Property" id="F5795ADC6CE04476BD06DEACA640CACD" action="add">
+    <column_alignment>left</column_alignment>
+    <column_width>80</column_width>
+    <data_type>boolean</data_type>
+    <is_hidden>0</is_hidden>
+    <is_hidden2>1</is_hidden2>
+    <is_indexed>0</is_indexed>
+    <is_keyed>0</is_keyed>
+    <is_multi_valued>0</is_multi_valued>
+    <is_required>0</is_required>
+    <label xml:lang="en">Weight has Goals</label>
+    <range_inclusive>0</range_inclusive>
+    <readonly>0</readonly>
+    <sort_order>916</sort_order>
+    <source_id keyed_name="Part" type="ItemType" name="Part">4F1AC04A2B484F3ABA4E20DB63808A88</source_id>
+    <track_history>0</track_history>
+    <name>weight_has_goals</name>
+   </Item>
+   <Item type="Property" id="D6B069F8E58B4DECA60C90BF704D9885" action="add">
+    <column_alignment>left</column_alignment>
+    <column_width>80</column_width>
+    <data_type>decimal</data_type>
+    <is_hidden>0</is_hidden>
+    <is_hidden2>0</is_hidden2>
+    <is_indexed>0</is_indexed>
+    <is_keyed>0</is_keyed>
+    <is_multi_valued>0</is_multi_valued>
+    <is_required>0</is_required>
+    <label xml:lang="en">Target Weight/Unit</label>
+    <prec>19</prec>
+    <range_inclusive>0</range_inclusive>
+    <readonly>1</readonly>
+    <scale>4</scale>
+    <sort_order>913</sort_order>
+    <source_id keyed_name="Part" type="ItemType" name="Part">4F1AC04A2B484F3ABA4E20DB63808A88</source_id>
+    <track_history>0</track_history>
+    <name>weight_target</name>
+   </Item>
+   <Item type="Property" id="A86E1EBE982C4304A8EE5A746C578F55" action="add">
+    <column_alignment>left</column_alignment>
+    <column_width>100</column_width>
+    <data_source keyed_name="Goal Basis">540DD8228C8043BD905BF401D245926E</data_source>
+    <data_type>list</data_type>
+    <is_hidden>0</is_hidden>
+    <is_hidden2>0</is_hidden2>
+    <is_indexed>0</is_indexed>
+    <is_keyed>0</is_keyed>
+    <is_multi_valued>0</is_multi_valued>
+    <is_required>0</is_required>
+    <label xml:lang="en">Weight Target Basis</label>
+    <range_inclusive>0</range_inclusive>
+    <readonly>1</readonly>
+    <sort_order>915</sort_order>
+    <source_id keyed_name="Part" type="ItemType" name="Part">4F1AC04A2B484F3ABA4E20DB63808A88</source_id>
+    <stored_length>64</stored_length>
+    <track_history>0</track_history>
+    <name>weight_target_basis</name>
+   </Item>
+   <Item type="Property" id="378958C7E97D40EEB42F81374C15A54D" action="add">
+    <column_alignment>left</column_alignment>
+    <column_width>60</column_width>
+    <data_type>string</data_type>
+    <default_value xml:lang="en">kg</default_value>
+    <is_hidden>0</is_hidden>
+    <is_hidden2>0</is_hidden2>
+    <is_indexed>0</is_indexed>
+    <is_keyed>0</is_keyed>
+    <is_multi_valued>0</is_multi_valued>
+    <is_required>0</is_required>
+    <label xml:lang="en">W-Unit</label>
+    <range_inclusive>0</range_inclusive>
+    <readonly>1</readonly>
+    <sort_order>912</sort_order>
+    <source_id keyed_name="Part" type="ItemType" name="Part">4F1AC04A2B484F3ABA4E20DB63808A88</source_id>
+    <stored_length>5</stored_length>
+    <track_history>0</track_history>
+    <name>weight_unit</name>
+   </Item>
+   <Item type="Server Event" id="DA5D030FB0B84D1D8DBD29BB7986C5D6" action="add">
+    <event_version>version_1</event_version>
+    <is_required>0</is_required>
+    <related_id keyed_name="RollupPartOnAfterAddUpdate" type="Method">
+     <Item type="Method" action="get" select="id">
+      <name>RollupPartOnAfterAddUpdate</name>
+     </Item>
+    </related_id>
+    <server_event>onAfterUpdate</server_event>
+    <sort_order>128</sort_order>
+    <source_id keyed_name="Part" type="ItemType" name="Part">4F1AC04A2B484F3ABA4E20DB63808A88</source_id>
+   </Item>
+   <Item type="Item Action" id="9C4EEE954D564A74968994C0FBBB7D08" action="add">
+    <related_id keyed_name="Add_PartGoalsToAllChildren" type="Action">58F38B6895C44AEBAD10F9B7B90A9CB6</related_id>
+    <sort_order>1600</sort_order>
+    <source_id keyed_name="Part" type="ItemType" name="Part">4F1AC04A2B484F3ABA4E20DB63808A88</source_id>
+   </Item>
+   <Item type="Item Action" id="C50F48D4AF3A4F0697BDA1E377ED7DC2" action="add">
+    <related_id keyed_name="Delete_PartGoalsFromAllChildren" type="Action">2D2BB01DE8734A55A9D04D642B66E069</related_id>
+    <sort_order>1610</sort_order>
+    <source_id keyed_name="Part" type="ItemType" name="Part">4F1AC04A2B484F3ABA4E20DB63808A88</source_id>
+   </Item>
+   <Item type="Item Action" id="214F981E1F9248B8BCDD3FC746E18580" action="add">
+    <related_id keyed_name="ReCalcPartGoalsOnBOMstruct" type="Action">7811AE9E9B5D47BF99A2236FDAD6105F</related_id>
+    <sort_order>1620</sort_order>
+    <source_id keyed_name="Part" type="ItemType" name="Part">4F1AC04A2B484F3ABA4E20DB63808A88</source_id>
+   </Item>
+   <Item type="Item Report" id="D648134073934BD08115B4313F8350FE" action="add">
+    <related_id keyed_name="BOM Cost Goals Rollup Report" type="Report">F72CAE512B79421BB1578483C348D467</related_id>
+    <sort_order>400</sort_order>
+    <source_id keyed_name="Part" type="ItemType" name="Part">4F1AC04A2B484F3ABA4E20DB63808A88</source_id>
+   </Item>
+   <Item type="Item Report" id="780BCBA33F7F4BB99DD0A2716F508293" action="add">
+    <related_id keyed_name="BOM Weight Goals Rollup Report" type="Report">5E2475D4F7844BDC9814482262E8E103</related_id>
+    <sort_order>410</sort_order>
+    <source_id keyed_name="Part" type="ItemType" name="Part">4F1AC04A2B484F3ABA4E20DB63808A88</source_id>
+   </Item>
+  </Relationships>
+ </Item>
+</AML>

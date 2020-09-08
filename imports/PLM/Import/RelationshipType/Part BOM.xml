@@ -1,0 +1,105 @@
+﻿<AML>
+ <Item type="RelationshipType" id="159C6D88795B4A86864420863466F728" action="add" dependencyLevel="0">
+  <relationship_id keyed_name="Part BOM" type="ItemType" name="Part BOM">
+   <Item type="ItemType" id="5E9C5A12CC58413A8670CF4003C57848" action="add">
+    <name>Part BOM</name>
+    <Relationships>
+     <Item type="Property" id="BBFFF9820B6C45F09AC3C33551C10F3E" action="add">
+      <column_alignment>right</column_alignment>
+      <column_width>100</column_width>
+      <data_type>federated</data_type>
+      <is_hidden>0</is_hidden>
+      <is_hidden2>0</is_hidden2>
+      <is_indexed>0</is_indexed>
+      <is_keyed>0</is_keyed>
+      <is_multi_valued>0</is_multi_valued>
+      <is_required>0</is_required>
+      <label xml:lang="en">Cost / Qty</label>
+      <range_inclusive>0</range_inclusive>
+      <readonly>0</readonly>
+      <sort_order>650</sort_order>
+      <source_id keyed_name="Part BOM" type="ItemType" name="Part BOM">5E9C5A12CC58413A8670CF4003C57848</source_id>
+      <track_history>0</track_history>
+      <name>cost_per_qty</name>
+     </Item>
+     <Item type="Property" id="2A55DFE12882489FA01334E63C3C4766" action="add">
+      <column_alignment>right</column_alignment>
+      <column_width>80</column_width>
+      <data_type>float</data_type>
+      <default_value xml:lang="en">1</default_value>
+      <is_hidden>0</is_hidden>
+      <is_hidden2>0</is_hidden2>
+      <is_indexed>0</is_indexed>
+      <is_keyed>0</is_keyed>
+      <is_multi_valued>0</is_multi_valued>
+      <is_required>1</is_required>
+      <label xml:lang="en">Quantity</label>
+      <range_inclusive>0</range_inclusive>
+      <readonly>0</readonly>
+      <sort_order>644</sort_order>
+      <source_id keyed_name="Part BOM" type="ItemType" name="Part BOM">5E9C5A12CC58413A8670CF4003C57848</source_id>
+      <track_history>0</track_history>
+      <name>quantity</name>
+     </Item>
+     <Item type="Property" id="3FDC009151F649FF933A822A6A8494F3" action="add">
+      <column_alignment>right</column_alignment>
+      <column_width>100</column_width>
+      <data_type>federated</data_type>
+      <is_hidden>0</is_hidden>
+      <is_hidden2>0</is_hidden2>
+      <is_indexed>0</is_indexed>
+      <is_keyed>0</is_keyed>
+      <is_multi_valued>0</is_multi_valued>
+      <is_required>0</is_required>
+      <label xml:lang="en">Weight / Qty</label>
+      <range_inclusive>0</range_inclusive>
+      <readonly>0</readonly>
+      <sort_order>655</sort_order>
+      <source_id keyed_name="Part BOM" type="ItemType" name="Part BOM">5E9C5A12CC58413A8670CF4003C57848</source_id>
+      <track_history>0</track_history>
+      <name>weight_per_qty</name>
+     </Item>
+     <Item type="Server Event" id="4062AAB320CB4F20801C9C87D4A81681" action="add">
+      <event_version>version_1</event_version>
+      <is_required>0</is_required>
+      <related_id keyed_name="AddOrDel_BOMpartWithPartGoals" type="Method">
+       <Item type="Method" action="get" select="id">
+        <name>AddOrDel_BOMpartWithPartGoals</name>
+       </Item>
+      </related_id>
+      <server_event>onAfterAdd</server_event>
+      <sort_order>384</sort_order>
+      <source_id keyed_name="Part BOM" type="ItemType" name="Part BOM">5E9C5A12CC58413A8670CF4003C57848</source_id>
+     </Item>
+     <Item type="Server Event" id="6B097870ADCA4445BB958F9ED18B844B" action="add">
+      <event_version>version_1</event_version>
+      <is_required>0</is_required>
+      <related_id keyed_name="AddOrDel_BOMpartWithPartGoals" type="Method">
+       <Item type="Method" action="get" select="id">
+        <name>AddOrDel_BOMpartWithPartGoals</name>
+       </Item>
+      </related_id>
+      <server_event>onAfterDelete</server_event>
+      <sort_order>512</sort_order>
+      <source_id keyed_name="Part BOM" type="ItemType" name="Part BOM">5E9C5A12CC58413A8670CF4003C57848</source_id>
+     </Item>
+     <Item type="Server Event" id="F7D6EE8ACF964760B303D32CCA31C9BC" action="add">
+      <event_version>version_1</event_version>
+      <is_required>0</is_required>
+      <related_id keyed_name="FederatedPartGoalsByQty" type="Method">
+       <Item type="Method" action="get" select="id">
+        <name>FederatedPartGoalsByQty</name>
+       </Item>
+      </related_id>
+      <server_event>onAfterGet</server_event>
+      <sort_order>257</sort_order>
+      <source_id keyed_name="Part BOM" type="ItemType" name="Part BOM">5E9C5A12CC58413A8670CF4003C57848</source_id>
+     </Item>
+    </Relationships>
+   </Item>
+  </relationship_id>
+  <sort_order>128</sort_order>
+  <source_id keyed_name="Part" type="ItemType" name="Part">4F1AC04A2B484F3ABA4E20DB63808A88</source_id>
+  <name>Part BOM</name>
+ </Item>
+</AML>
