@@ -59,8 +59,6 @@ The installation can be done in 2 ways:
 1. Automated: Using the Aras Update tool (recommended) - Update version 1.9 or higher
 2. Manually: Using the packages import tool 
 
-NOTE: in both cases you must do the manual configuration steps as administrator described in section "Post Import Steps" !!!
-
 1. Backup your database and store the BAK file in a safe place.
 
 ### Automated: Using Aras Update
