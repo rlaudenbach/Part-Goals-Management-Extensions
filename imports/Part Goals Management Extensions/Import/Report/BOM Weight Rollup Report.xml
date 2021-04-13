@@ -32,6 +32,9 @@
 		  <html>
 			   <head/>
 			   <style type="text/css" userData="Global">
+				@media print {
+				body {-webkit-print-color-adjust: exact;}
+				}
 				.cellSolid {
 				border-top:1px #000000 solid;
 				border-right:1px #000000 solid;
